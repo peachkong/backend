@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="ko">
 
@@ -6,23 +8,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>check</title>
 
-  <link rel="stylesheet" href="/Oulim/asset/css/core/reset.css" />
-  <link rel="stylesheet" href="/Oulim/asset/css/core/variable.css" />
-  <link rel="stylesheet" href="/Oulim/asset/css/core/typography.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/reset.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/variable.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/typography.css" />
 
-  <link rel="stylesheet" href="/Oulim/asset/css/component/input.css" />
-  <link rel="stylesheet" href="/Oulim/asset/css/component/button.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/input.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/button.css" />
 
-  <link rel="stylesheet" href="/Oulim/asset/css/pages/mypage/check/check.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/mypage/check/check.css">
+  
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/main/header-login.css"/>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
 
-  <script defer src="/Oulim/asset/js/pages/main/include.js"></script>
-
-  <script defer src="/Oulim/asset/js/pages/mypage/check/check.js"></script>
+  <script defer src="${pageContext.request.contextPath}/asset/js/pages/mypage/check/check.js"></script>
 </head>
 
 <body>
-
-  <div id="header"></div>
+	<jsp:include page="/app/include/header.jsp" />
 
   <main class="l-main">
 
@@ -38,17 +40,17 @@
               <div class="p-mypage-check--menu-group">
                 <li>나의 정보</li>
                 <br />
-                <a href="/Oulim/front/html/mypage/check/check.html"><li>- 내 정보 보기</li></a>
+                <a href="${pageContext.request.contextPath}/front/html/mypage/check/check.html"><li>- 내 정보 보기</li></a>
                 <br />
-                <a href="/Oulim/front/html/mypage/check/check.html"><li>- 내 정보 수정</li></a>
+                <a href="${pageContext.request.contextPath}/front/html/mypage/check/check.html"><li>- 내 정보 수정</li></a>
               </div>
 
               <div class="p-mypage-check--menu-group">
                 <li>봉사조회</li>
                 <br />
-                <a href="/Oulim/front/html/mypage/check/check.html"><li>- 예정된 봉사 이력 조회</li></a>
+                <a href="${pageContext.request.contextPath}/front/html/mypage/check/check.html"><li>- 예정된 봉사 이력 조회</li></a>
                 <br />
-                <a href="/Oulim/front/html/mypage/check/check.html"><li>- 완료된 봉사 이력 조회</li></a>
+                <a href="${pageContext.request.contextPath}/front/html/mypage/check/check.html"><li>- 완료된 봉사 이력 조회</li></a>
               </div>
 
               <div class="p-mypage-check--menu-group">
@@ -92,7 +94,7 @@
 
             <div class="p-mypage-check--input">
               <input type="password" class="c-input" name="password" placeholder="비밀번호 입력" />
-             <button type="button" id="c-password-btn-toggle"><img src="/Oulim/asset/image/user/password-off.png" alt="eye" id="c-password-toggle-img" /></button>
+             <button type="button" id="c-password-btn-toggle"><img src="${pageContext.request.contextPath}/asset/image/user/password-off.png" alt="eye" id="c-password-toggle-img" /></button>
             </div>
 
           </div>
@@ -115,7 +117,7 @@
 
   </main>
 
-  <div id="footer"></div>
+<jsp:include page="/app/include/footer.jsp" />
 
 </body>
 

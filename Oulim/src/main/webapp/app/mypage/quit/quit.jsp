@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="ko">
 
@@ -7,26 +9,24 @@
   <title>quit</title>
 
   <!-- base css -->
-  <link rel="stylesheet" href="/Oulim/asset/css/core/reset.css" />
-  <link rel="stylesheet" href="/Oulim/asset/css/core/variable.css" />
-  <link rel="stylesheet" href="/Oulim/asset/css/core/typography.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/reset.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/variable.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/typography.css" />
 
   <!-- component css -->
-  <link rel="stylesheet" href="/Oulim/asset/css/component/input.css" />
-  <link rel="stylesheet" href="/Oulim/asset/css/component/button.css" />
-  <link rel="stylesheet" href="/Oulim/asset/css/component/checkbox.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/input.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/button.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/checkbox.css">
 
-  <link rel="stylesheet" href="/Oulim/asset/css/pages/mypage/quit/quit.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/mypage/quit/quit.css" />
+    	<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/main/header-login.css"/>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
 
-  <script defer src="/Oulim/asset/js/pages/main/include.js"></script>
-
-  <script defer src="/Oulim/asset/js/pages/mypage/quit/quit.js"></script>
+  <script defer src="${pageContext.request.contextPath}/asset/js/pages/mypage/quit/quit.js"></script>
 </head>
 
 <body>
-
-  <div id="header"></div>
-
+<jsp:include page="/app/include/header.jsp" />
   <main class="l-main">
 
     <div class="main-container">
@@ -41,11 +41,11 @@
             <ul class="list1">
               <li>나의 정보</li>
               <br>
-              <a href="/Oulim/front/html/mypage/profile/profile.html">
+              <a href="${pageContext.request.contextPath}/front/html/mypage/profile/profile.html">
                 <li>- 내 정보 보기</li>
               </a>
               <br>
-              <a href="/Oulim/front/html/mypage/profile/profile-edit.html">
+              <a href="${pageContext.request.contextPath}/front/html/mypage/profile/profile-edit.html">
                 <li>- 내 정보 수정</li>
               </a>
               <br>
@@ -54,30 +54,30 @@
             <ul class="list2">
               <li>봉사조회</li>
               <br>
-              <a href="/Oulim/front/html/mypage/volunteer-history/coming-volunteer.html">
+              <a href="${pageContext.request.contextPath}/front/html/mypage/volunteer-history/coming-volunteer.html">
                 <li>- 예정된 봉사 이력 조회</li>
               </a>
               <br>
-              <a href="/Oulim/front/html/mypage/volunteer-history/finish-volunteer.html">
+              <a href="${pageContext.request.contextPath}/front/html/mypage/volunteer-history/finish-volunteer.html">
                 <li>- 완료된 봉사 이력 조회</li>
               </a>
 
             </ul>
 
             <ul class="list3">
-              <a href="/Oulim/front/html/mypage/point-history/point-history.html">
+              <a href="${pageContext.request.contextPath}/front/html/mypage/point-history/point-history.html">
                 <li>포인트 조회</li>
               </a>
             </ul>
 
             <ul class="list4">
-              <a href="/Oulim/front/html/mypage/community-history/myposts.html">
+              <a href="${pageContext.request.contextPath}/front/html/mypage/community-history/myposts.html">
                 <li>작성글 조회</li>
               </a>
             </ul>
 
             <ul class="list5">
-              <a href="/Oulim/front/html/mypage/quit/quit.html">
+              <a href="${pageContext.request.contextPath}/front/html/mypage/quit/quit.html">
                 <li>회원 탈퇴</li>
               </a>
             </ul>
@@ -169,7 +169,7 @@
 
   </main>
 
-  <div id="footer"></div>
+  <jsp:include page="/app/include/footer.jsp" />
 
 </body>
 
