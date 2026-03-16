@@ -6,7 +6,7 @@
 	</insert>
 	<!-- 로그인 쿼리 -->
 	<select id="login" parameterType="UserDTO" resultType="int">
-		SELECT user_no,  FROM tbl_user
+		SELECT user_no, user_nickname, user_type  FROM tbl_user
 		WHERE user_id = #{userId} and user_pw = #{userPw} and user_status = 1;
 	</select>
 	

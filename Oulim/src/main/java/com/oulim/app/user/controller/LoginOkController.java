@@ -1,4 +1,4 @@
-package com.example.app.user.controller;
+package com.oulim.app.user.controller;
 
 import java.io.IOException;
 
@@ -21,40 +21,40 @@ public class LoginOkController implements Execute{
 		
 		UserDTO userDTO = new UserDTO();
 		UserDAO userDAO = new UserDAO();
-		int userNumber = 0;
+		int memberNumber = 0;
 		Result result = new Result();
 		
-		String userId = request.getParameter("userId");
-		String userPassword = request.getParameter("userPassword");
-		String reuser = request.getParameter("reuser");
+		String memberId = request.getParameter("memberId");
+		String memberPassword = request.getParameter("memberPassword");
+		String remember = request.getParameter("remember");
 		HttpSession session = request.getSession(); //+++ 세션저장
 		String path = null;
 		
-		userDTO.setuserId(userId);
-		userDTO.setuserPw(userPw);
+		userDTO.setUserId(userId);
+		userDTO.setUserPw(userPw);
 		System.out.println(userDTO);
 		
 		//쿼리문 실행 메소드 호출
-		userNumber = userDAO.login(userDTO);
-		System.out.println(userNumber); 
+		memberNumber = memberDAO.login(memberDTO);
+		System.out.println(memberNumber); 
 		
-		if(userNumber != -1) {
-			path = "/user/join.me";
-			session.setAttribute("userNumber", userNumber);
-			System.out.println("세션값 : " + userNumber);
+		if(memberNumber != -1) {
+			path = "/member/join.me";
+			session.setAttribute("memberNumber", memberNumber);
+			System.out.println("세션값 : " + memberNumber);
 			
-			if(reuser != null) {
-				Cookie cookie = new Cookie("userId", userId);
+			if(remember != null) {
+				Cookie cookie = new Cookie("memberId", memberId);
 				cookie.setMaxAge(60 * 60 * 24); //1일
 				response.addCookie(cookie);
 			}else {
 				//체크 해제시 쿠키 삭제
-				Cookie cookie = new Cookie("userId", "");
+				Cookie cookie = new Cookie("memberId", "");
 				cookie.setMaxAge(0);
 				response.addCookie(cookie);
 			}
 		}else {
-			path = "/user/login.me?login=fail";
+			path = "/member/login.me?login=fail";
 		}
 		
 		result.setRedirect(true); //세션에 저장된 값은 유지
