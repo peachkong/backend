@@ -1,10 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="ko">
 
 <head>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>coming-volunteer</title>
+  <title>finish-volunteer</title>
 
   <link rel="stylesheet" href="/Oulim/asset/css/core/reset.css" />
   <link rel="stylesheet" href="/Oulim/asset/css/core/variable.css" />
@@ -18,9 +21,10 @@
   <link rel="stylesheet" href="/Oulim/asset/css/component/DetailCard.css" />
   <link rel="stylesheet" href="/Oulim/asset/css/component/badge.css" />
 
-  <link rel="stylesheet" href="/Oulim/asset/css/pages/mypage/volunteer-history/coming-volunteer.css" />
+  <link rel="stylesheet" href="/Oulim/asset/css/pages/mypage/volunteer-history/finish-volunteer.css" />
 
   <script defer src="/Oulim/asset/js/pages/main/include.js"></script>
+
 </head>
 
 <body>
@@ -33,6 +37,7 @@
 
       <!-- aside -->
       <div class="main-aside">
+
         <aside>
           <div class="main-aside-list">
 
@@ -84,66 +89,26 @@
 
           </div>
         </aside>
+
       </div>
 
 
       <!-- content -->
       <div class="main-2">
-
+        
         <div class="main-section1">
-          <a href="/Oulim/front/html/volunteer-activity/volunAct-detail.html">
-          <h1>예정된 봉사 이력 조회</h1>
+          <h1>완료된 봉사 이력 조회</h1>
         </div>
 
 
         <div class="main-section3">
-
-          <div class="c-card">
-
-            <div class="c-card__header">
-              <span class="c-badge c-badge--primary">모집중</span>
-            </div>
-
-            <h3 class="c-card__title">
-              주민과 함께하는 제설작업 봉사 모집
-            </h3>
-
-            <p class="c-card__desc">
-              지역 주민들과 함께하는 봉사 활동입니다.
-            </p>
-
-            <div class="c-card__footer">
-              <span>2026.02.03 ~ 2026.02.06</span>
-            </div>
-            </a>
-          </div>
-
-
-          <a href="/Oulim/front/html/volunteer-activity/volunAct-detail.html">
-          <div class="c-card">
-            <div class="c-card__header">
-              <span class="c-badge c-badge--primary">모집중</span>
-            </div>
-
-            <h3 class="c-card__title">
-              주민과 함께하는 제설작업 봉사 모집
-            </h3>
-
-            <p class="c-card__desc">
-              지역 주민들과 함께하는 봉사 활동입니다.
-            </p>
-
-            <div class="c-card__footer">
-              <span>2026.02.03 ~ 2026.02.06</span>
-            </div>
-            </a>
-          </div>
-
           <a href="/Oulim/front/html/volunteer-activity/volunAct-detail.html">
           <div class="c-card">
 
+
+
             <div class="c-card__header">
-              <span class="c-badge c-badge--primary">모집중</span>
+              <span class="c-badge c-badge--primary">완료</span>
             </div>
 
             <h3 class="c-card__title">
@@ -160,6 +125,48 @@
             </a>
           </div>
 
+
+          <div class="c-card">
+            <a href="/Oulim/front/html/volunteer-activity/volunAct-detail.html">
+            <div class="c-card__header">
+              <span class="c-badge c-badge--primary">완료</span>
+            </div>
+
+            <h3 class="c-card__title">
+              주민과 함께하는 제설작업 봉사 모집
+            </h3>
+
+            <p class="c-card__desc">
+              지역 주민들과 함께하는 봉사 활동입니다.
+            </p>
+
+            <div class="c-card__footer">
+              <span>2026.02.03 ~ 2026.02.06</span>
+            </div>
+            </a>
+          </div>
+
+
+          <div class="c-card">
+            <a href="/Oulim/front/html/volunteer-activity/volunAct-detail.html">
+            <div class="c-card__header">
+              <span class="c-badge c-badge--primary">완료</span>
+            </div>
+
+            <h3 class="c-card__title">
+              주민과 함께하는 제설작업 봉사 모집
+            </h3>
+
+            <p class="c-card__desc">
+              지역 주민들과 함께하는 봉사 활동입니다.
+            </p>
+
+            <div class="c-card__footer">
+              <span>2026.02.03 ~ 2026.02.06</span>
+            </div>
+
+          </div>
+          </a>
         </div>
 
 
@@ -183,6 +190,7 @@
           </nav>
 
         </div>
+
 
       </div>
 

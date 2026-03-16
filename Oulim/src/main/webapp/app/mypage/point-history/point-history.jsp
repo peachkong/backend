@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="ko">
 
@@ -28,8 +30,7 @@
 
 <body>
 
-  <div id="header"></div>
-
+<jsp:include page="/app/include/header-login.jsp" />
   <main class="l-main">
 
     <div class="l-mypage">
@@ -262,7 +263,8 @@
 
   </main>
 
-  <div id="footer"></div>
+
+<jsp:include page="/app/include/footer.jsp" />
 
 </body>
 
