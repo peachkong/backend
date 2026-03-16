@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapper namespace="kkomi">
+	<!-- 꼬미 조회 -->
+	<select id="kkomiSelect" parameterType="int"
+		resultType="KkomiDTO">
+		SELECT tk.kkomi_no, tk.kkomi_lev, tk.kkomi_Exp
+		FROM
+		tbl_kkomi tk
+		WHERE #{userNo} = tk.user_no
+	</select>
+
+	<!-- 꼬미 도력 쌓기 -->
+	<merge id="kkomiExpUp" parameterType="" resultType="">
+		<![CDATA[
+		MERGE INTO	TBL_KKOMI tk USING (
+		SELECT #{User_No} AS user_no FROM DUAL
+		) src ON (tk.user_no = src.user_no)
+		WHEN NOT MATCHED THEN
+			INSERT (User_No, kkomi_Id, kkomi_Lev, kkomi_exp)
+			VALUES (src.User_No, 1, #{kkomiLev}, #{kkomiExp})
+		WHEN MATCHED THEN
+			UPDATE SET tk.kkomi_Lev = #{kkomiLev}, tk.kkomi_Exp = #{kkomiExp}
+			WHERE NVL(tk.kkomi_Lev,1) <= #{kkomiLev} and NVL(tk.kkomi_Exp,0) <= #{kkomiExp} ;
+		]]>
+	</merge>
+	
+	<!-- 상위권 포함 랭킹 조회 -->
+	
+</mapper>

@@ -7,7 +7,7 @@ const nicknameError = document.getElementById("is-user-nickname-error");
 const userIdError = document.getElementById("is-user-id-error");
 const passwordError = document.getElementById("is-user-password-error");
 const passwordCheckError = document.getElementById(
-  "is-user-password-check-error",
+  "is-user-password-check-error"
 );
 
 const signupBtn = document.getElementById("is-signup-btn");
@@ -86,10 +86,10 @@ const pwToggleIcon = document.getElementById("c-password-toggle-img");
 pwBtn.addEventListener("click", () => {
   if (userPw.type === "password") {
     userPw.type = "text";
-    pwToggleIcon.src = "/Oulim/asset/image/user/password-on.png";
+    pwToggleIcon.src = contextPath + "/asset/image/user/password-on.png";
   } else {
     userPw.type = "password";
-    pwToggleIcon.src = "/Oulim/asset/image/user/password-off.png";
+    pwToggleIcon.src = contextPath + "/asset/image/user/password-off.png";
   }
 });
 
@@ -101,9 +101,9 @@ const pwToggleIcon2 = document.getElementById("c-password-toggle-img-2");
 pwBtn2.addEventListener("click", () => {
   if (userPw2.type === "password") {
     userPw2.type = "text";
-    pwToggleIcon.src = "/Oulim/asset/image/user/password-on.png";
+    pwToggleIcon2.src = contextPath + "/asset/image/user/password-on.png";
   } else {
-    userPw.type = "password";
-    pwToggleIcon.src = "/Oulim/asset/image/user/password-off.png";
+    userPw2.type = "password";
+    pwToggleIcon2.src = contextPath + "/asset/image/user/password-off.png";
   }
 });

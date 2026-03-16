@@ -10,6 +10,8 @@ Desktop.ini
 # IDE & Editors
 # =============================
 
+Servers/
+
 # IntelliJ
 .idea/
 *.iml
