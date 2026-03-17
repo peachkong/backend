@@ -44,6 +44,8 @@ public class CommunityFrontController extends HttpServlet {
 		switch(target) {
 		case "/community/list.commu" ->{
 			System.out.println("봉사후기 조회 입장");
+			result = new CommunityListOkController().execute(request, response);
+			System.out.println("봉사후기 조회 처리 완료");
 		}
 		case "/community/post.commu"->{
 			System.out.println("봉사후기 등록");
@@ -71,6 +73,14 @@ public class CommunityFrontController extends HttpServlet {
 		case "/community/postDelete.commu" ->{
 			System.out.println("후기 삭제");
 		}
+		}
+		
+		if(result != null && result.getPath() != null) {
+			if(result.isRedirect()) {
+				response.sendRedirect(result.getPath());
+			}else {
+				request.getRequestDispatcher(result.getPath()).forward(request,response);
+			}
 		}
 	}
 
