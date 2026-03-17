@@ -9,6 +9,7 @@ import com.oulim.app.community.dto.CommunityCommentDTO;
 import com.oulim.app.community.dto.CommunityPostDTO;
 import com.oulim.app.community.dto.CommunityPostJoinLikeDTO;
 import com.oulim.app.community.dto.PostLikeDTO;
+
 import com.oulim.app.config.MyBatisConfig;
 
 public class CommunityDAO {

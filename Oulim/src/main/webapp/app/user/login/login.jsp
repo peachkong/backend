@@ -36,7 +36,7 @@
 	<jsp:include page="/app/include/header.jsp" />
 	<div class="l-main">
 		<div class="l-container">
-			<form action="/Oulim/main.html" method="get" id="loginForm">
+			<form action="${pageContext.request.contextPath}/user/loginOk.usr" method="post" id="loginForm">
 				<div class="p-login">
 					<div class="l-login-layout">
 						<div>
@@ -49,8 +49,8 @@
 									<h6 class="text-sm">아이디</h6>
 								</div>
 								<div>
-									<input type="text" name="userID" id="userID" class="c-input"
-										placeholder="아이디 입력해주세요" />
+									<input type="text" name="userId" id="userId" class="c-input" 
+									placeholder="아이디 입력해주세요" />
 								</div>
 								<p class="is-error-message" id="userIDError"></p>
 							</div>
@@ -59,8 +59,7 @@
 									<h6 class="text-sm">비밀번호</h6>
 								</div>
 								<div class="l-toggle-layout">
-									<input type="password" name="userPw" id="userPw"
-										class="c-input" placeholder="비밀번호 입력해주세요" />
+									<input type="password" name="userPw" id="userPw" class="c-input" placeholder="비밀번호 입력해주세요" />
 									<button type="button" id="c-password-btn-toggle">
 										<img src="${pageContext.request.contextPath}/asset/image/user/password-off.png" alt="eye"
 											id="c-password-toggle-img" />

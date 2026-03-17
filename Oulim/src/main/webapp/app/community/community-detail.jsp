@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="ko">
   <head>
@@ -6,42 +8,30 @@
     <title>봉사 후기</title>
 
     <!-- base css 필수 삽입-->
-    <link rel="stylesheet" href="/Oulim/asset/css/core/reset.css" />
-    <link rel="stylesheet" href="/Oulim/asset/css/core/variable.css" />
-    <link rel="stylesheet" href="/Oulim/asset/css/core/typography.css" />
-    <link rel="stylesheet" href="/Oulim/asset/css/core/layout.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/reset.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/variable.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/typography.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/layout.css" />
     <!-- 컨포넌트 css 선택-->
-    <link rel="stylesheet" href="/Oulim/asset/css/component/pagination.css" />
-    <link rel="stylesheet" href="/Oulim/asset/css/component/input.css" />
-    <link rel="stylesheet" href="/Oulim/asset/css/component/button.css" />
-    <link rel="stylesheet" href="/Oulim/asset/css/component/list.css" />
-    <link rel="stylesheet" href="/Oulim/asset/css/component/card.css" />
-    <link rel="stylesheet" href="/Oulim/asset/css/component/DetailCard.css" />
-    <link rel="stylesheet" href="/Oulim/asset/css/component/badge.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/pagination.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/input.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/button.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/list.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/card.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/DetailCard.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/badge.css" />
     <!-- css 연결 -->
-    <link
-      rel="stylesheet"
-      href="/Oulim/asset/css/pages/community/community-detail.css"
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/community/community-detail.css"
     />
-    <script defer src="/Oulim/asset/js/pages/main/include.js"></script>
-    <script
-      defer
-      src="/Oulim/asset/js/pages/community/community-detail.js"
-    ></script>
+    <script defer src="${pageContext.request.contextPath}/asset/js/pages/main/include.js"></script>
+    <script defer src="${pageContext.request.contextPath}/asset/js/pages/community/community-detail.js">
+    </script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/main/header-login.css"/>
+  	<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
   </head>
-  <script defer>
-    fetch("/Oulim/header-login.html")
-      .then((r) => r.text())
-      .then((t) => (header.innerHTML = t));
-    fetch("/Oulim/footer.html")
-      .then((r) => r.text())
-      .then((t) => (footer.innerHTML = t));
-  </script>
-  <div id="header"></div>
-
   <body>
     <!-- Header 자동 삽입 -->
-    <!-- <%@ include file="header.jsp" %> -->
+  	<jsp:include page="/app/include/header.jsp" />
 
     <main class="l-main">
       <div class="l-container">
@@ -94,7 +84,6 @@
     </main>
 
     <!-- Footer 자동 삽입 -->
-    <!-- <%@ include file="footer.jsp" %> -->
+  <jsp:include page="/app/include/footer.jsp" />
   </body>
-  <div id="footer"></div>
 </html>

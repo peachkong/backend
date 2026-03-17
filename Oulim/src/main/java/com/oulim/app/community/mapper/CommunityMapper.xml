@@ -92,4 +92,5 @@
 		INSERT TBL_POST_LIKE (Post_Like_No, Post_No, User_No)
 		VALUES (SEQ_TBL_POST_LIKE.nextval, #{postNo}, #{userNo})
 	</insert>
+
 </mapper>
