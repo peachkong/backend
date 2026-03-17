@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="VolunteerManagement">
+
+	<!--검색  -->
+	<select id="volManageSelect" parameterType="VolunActivityDTO"
+		resultType="VolunActivityDTO">
+		SELECT
+		VOLUN_ACT_NO,
+		VOLUN_ACT_TITLE,
+		VOLUN_ACT_RECRU_BEGIN,
+		VOLUN_ACT_RECRU_END,
+		CASE
+		WHEN SYSDATE &lt; VOLUN_ACT_RECRU_BEGIN THEN '모집예정'
+		WHEN SYSDATE &lt; VOLUN_ACT_RECRU_END + 1 THEN '모집중'
+		ELSE '모집마감'
+		END AS RECRU_STATUS	
+		FROM TBL_VOLUN_ACTIVITY
+		WHERE VOLUN_ACT_ORGAN_NO = #{volunActOrganNo}
+
+		<if test="actType != null and actType != ''">
+			AND (
+			(#{actType} = 'environment' AND VOLUN_ACT_ACT_TYPE = 1)
+			OR
+			(#{actType} = 'medical' AND VOLUN_ACT_ACT_TYPE = 2)
+			OR (#{actType} =
+			'education' AND VOLUN_ACT_ACT_TYPE = 3)
+			)
+		</if>
+
+		<if test="recruitStatus != null and recruitStatus != ''">
+			AND (
+			(#{recruitStatus} = 'before-recruit' AND SYSDATE &lt;
+			VOLUN_ACT_RECRU_BEGIN)
+			OR (#{recruitStatus} = 'recruit' AND SYSDATE
+			&gt;= VOLUN_ACT_RECRU_BEGIN AND SYSDATE &lt; VOLUN_ACT_RECRU_END + 1)
+			OR (#{recruitStatus} = 'recruit-end' AND SYSDATE &gt;=
+			VOLUN_ACT_RECRU_END + 1)
+			)
+		</if>
+
+		<if test="keyword != null and keyword != ''">
+			AND VOLUN_ACT_TITLE LIKE '%' || #{keyword} || '%'
+		</if>
+
+		ORDER BY VOLUN_ACT_RECRU_END DESC
+	</select>
+
+	<select id="volManageSelectAll" parameterType="VolunActivityDTO"
+		resultType="int">
+		SELECT COUNT(VOLUN_ACT_NO)
+		FROM TBL_VOLUN_ACTIVITY
+		WHERE
+		VOLUN_ACT_ORGAN_NO = #{volunActOrganNo}
+
+		<if test="volunActActType != 0">
+			AND VOLUN_ACT_ACT_TYPE = #{volunActActType}
+		</if>
+
+		<if test="keyword != null and keyword != ''">
+			AND VOLUN_ACT_TITLE LIKE '%' || #{keyword} || '%'
+		</if>
+
+		<if test="recruitStatus != null and recruitStatus != ''">
+			AND (
+			(#{recruitStatus} = '모집예정' AND SYSDATE &lt; VOLUN_ACT_RECRU_BEGIN)
+			OR (#{recruitStatus} = '모집중' AND SYSDATE &gt;= VOLUN_ACT_RECRU_BEGIN
+			AND SYSDATE &lt; VOLUN_ACT_RECRU_END + 1)
+			OR (#{recruitStatus} = '모집완료' AND SYSDATE &gt;= VOLUN_ACT_RECRU_END +
+			1)
+			)
+		</if>
+	</select>
+</mapper>
