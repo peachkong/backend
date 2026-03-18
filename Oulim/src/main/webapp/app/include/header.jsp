@@ -49,7 +49,7 @@
 							<h4>${sessionScope.userNickname}님</h4>
 						</div>
 						<div class="c-button c-button--secondary c-button--md">
-							<a href="">마이페이지</a>
+							<a href="${pageContext.request.contextPath}/mypage/check.mp">마이페이지</a>
 						</div>
 						<div class="c-button c-button--secondary c-button--md">
 							<a href="${pageContext.request.contextPath}/user/logout.usr">로그아웃</a>

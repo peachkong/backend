@@ -17,9 +17,10 @@ public class MyPageJoinDAO {
 	
 //	1. 마이페이지 진입
 	
-	public boolean enterMyPage(int userNo) {
-		return (Integer)(sqlSession.selectOne("mypage.enterMyPage", userNo)) == 1;
-	}
+//	public boolean enterMyPage(int userNo) {
+//		return (Integer)(sqlSession.selectOne("mypage.enterMyPage", userNo)) == 1;
+//	}
+	
 	public String enterMyPage1(int userNo) {
 		return sqlSession.selectOne("mypage.enterMyPage", userNo);
 	}

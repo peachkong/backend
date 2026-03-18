@@ -32,6 +32,7 @@ public class MyPageUserInfoController implements Execute{
 		mypageDAO.miniFinVol(userNo);
 		mypageDAO.miniPoint(userNo);
 		
+		
 		result.setPath("/app/mypage/profile/profile.jsp");
 		result.setRedirect(false);
 		

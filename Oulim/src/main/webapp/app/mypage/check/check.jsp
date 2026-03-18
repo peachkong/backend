@@ -84,7 +84,7 @@
 
         </div>
 
-        <form>
+        <form action="${pageContext.request.contextPath}/mypage/checkOk.mp" method="post">
 
           <div class="p-mypage-check--form">
 
