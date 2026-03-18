@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<select id="login" parameterType="AdminDTO" resultType="AdminDTO">
+    SELECT *
+    FROM tbl_admin_account
+    WHERE admin_id = #{adminId}
+      AND admin_pw = #{adminPw}
+</select> 
