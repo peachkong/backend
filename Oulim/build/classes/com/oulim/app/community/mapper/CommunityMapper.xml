@@ -26,12 +26,6 @@
 		WHERE post_no = #{postNo}
 	</delete>
 	
-<<<<<<< HEAD
-	<!-- 게시글 수정 -->
-	<update id="updatePost" parameterType="CommunityPostDTO">
-		UPDATE TBL_COMMUNITY_POST
-		SET Post_Title = #{postTitle}, POST_CONTENT = #{postContent}, USER_NICKNAME= #{userNickname}
-=======
 	<!-- 게시글 작성 -->
 	<insert id="postInsert" parameterType="CommunityPostDTO">
 		<selectKey keyProperty="postNo" resultType="int" order="BEFORE">
@@ -45,20 +39,10 @@
 	<update id="updatePost" parameterType="CommunityPostDTO">
 		UPDATE TBL_COMMUNITY_POST
 		SET Post_Title = #{postTitle}, POST_CONTENT = #{postContent}, USER_NICKNAME= #{userNickname}, POST_DATE = #{postDate}
->>>>>>> c45756f4c95836569463a6c27d31b8a33b893de8
 		WHERE POST_NO = #{postNo}
 	</update>
 	
 	<!-- 댓글 작성 -->
-<<<<<<< HEAD
-	<insert id="commentPost" parameterType="CommunityCommentDTO">
-		INSERT INTO TBL_COMMUNITY_COMMENT (COMMENT_NO, USER_NO, POST_NO, USER_NICKNAME, COMMENT_CONTENT, POST_DATE)
-		VALUES(SEQ_TBL_COMMUNITY_COMMENT.nextval, #{userNo}, #{postNo}, #{userNickname, #{commentContent}, #{postDate})
-	</insert>
-	
-	<!-- 전체 게시글 조회 -->
-	<select id="selectPostAll" resultType="CommunityPostJoinLikeDTO">
-=======
 	<insert id="commentInsert" parameterType="CommunityCommentDTO">
 		INSERT INTO TBL_COMMUNITY_COMMENT (COMMENT_NO, USER_NO, POST_NO, USER_NICKNAME, COMMENT_CONTENT, POST_DATE)
 		VALUES(SEQ_TBL_COMMUNITY_COMMENT.nextval, #{userNo}, #{postNo}, #{userNickname}, #{commentContent}, #{postDate})
@@ -66,7 +50,6 @@
 	
 	<!-- 전체 게시글 조회 -->
 <!-- 	<select id="selectPostAll" resultType="CommunityPostJoinDTO">
->>>>>>> c45756f4c95836569463a6c27d31b8a33b893de8
 		<![CDATA[
 			SELECT * FROM (
 			SELECT ROWNUM AS RNUM, subquery.*
@@ -78,17 +61,6 @@
 			) subquery
 			) WHERE RNUM BETWEEN #{startRow} AND #{endRow}
 		]]>
-<<<<<<< HEAD
-	</select>
-	
-	<!-- 게시글 상세 -->
-	<select id="selectPost" parameterType="int" resultType="CommunityPostJoinLikeDTO">
-	<![CDATA[
-		SELECT tcp.post_no,tcp.user_no, tcp.post_title, tcp.user_nickname, tcp.post_date, tcp.post_content,
-		tcp.post_view_count, 
-		(select count(post_like_no) from tbl_post_like tpl where tpl.post_no = tcp.post_no) as like_count
-		FROM tbl_community_post tcp
-=======
 	</select> -->
 	
 		<!-- 전체 게시글 조회 -->
@@ -135,7 +107,6 @@
 		tpi.Post_Img_System_Name, tpi.Post_Img_Origin_Name
 		FROM tbl_community_post tcp
 		LEFT JOIN tbl_post_image tpi on tpi.post_no = tcp.post_no
->>>>>>> c45756f4c95836569463a6c27d31b8a33b893de8
 		where tcp.post_no = #{postNo}
 	]]>
 	</select>
@@ -146,19 +117,13 @@
 			SELECT * FROM(
 				SELECT ROWNUM AS rnum, subquery.*
 				FROM (
-<<<<<<< HEAD
-					SELECT tcc.comment_no, tcc.user_no, tcc.user_nickname, tcc.coment_content, tcc.post_date
-=======
 					SELECT tcc.comment_no, tcc.user_no, tcc.user_nickname, tcc.comment_content, tcc.post_date
->>>>>>> c45756f4c95836569463a6c27d31b8a33b893de8
 					FROM tbl_community_comment tcc
 					WHERE tcc.post_no = #{postNo}
 					ORDER BY tcc.post_date desc ) subquery
 				) WHERE rnum between #{startRow} and #{endRow}
 		]]>
 	</select>
-<<<<<<< HEAD
-=======
 	
 	<!-- 게시글 추천 -->
 	<insert id="postLike" parameterType="PostLikeDTO">
@@ -184,5 +149,4 @@
 		</where>
 		ORDER BY post_date DESC
 	</select>
->>>>>>> c45756f4c95836569463a6c27d31b8a33b893de8
 </mapper>
