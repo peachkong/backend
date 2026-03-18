@@ -63,7 +63,7 @@ public class CommunityUpdateOkController implements Execute {
 				FilePart filePart = (FilePart) part;
 				filePart.setRenamePolicy(new DefaultFileRenamePolicy());
 				String fileOriginalName = filePart.getFileName();
-				
+
 				if(postNo != 0) {
 					List<PostImageDTO> existingFiles = commuFileDAO.select(postNo);
 					for(PostImageDTO image : existingFiles) {

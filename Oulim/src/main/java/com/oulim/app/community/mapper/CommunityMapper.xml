@@ -38,14 +38,14 @@
 	<!-- 게시글 수정 -->
 	<update id="updatePost" parameterType="CommunityPostDTO">
 		UPDATE TBL_COMMUNITY_POST
-		SET Post_Title = #{postTitle}, POST_CONTENT = #{postContent}, USER_NICKNAME= #{userNickname}, POST_DATE = #{postDate}
+		SET Post_Title = #{postTitle}, POST_CONTENT = #{postContent}, USER_NICKNAME= #{userNickname}, POST_DATE = sysdate
 		WHERE POST_NO = #{postNo}
 	</update>
 	
 	<!-- 댓글 작성 -->
 	<insert id="commentInsert" parameterType="CommunityCommentDTO">
 		INSERT INTO TBL_COMMUNITY_COMMENT (COMMENT_NO, USER_NO, POST_NO, USER_NICKNAME, COMMENT_CONTENT, POST_DATE)
-		VALUES(SEQ_TBL_COMMUNITY_COMMENT.nextval, #{userNo}, #{postNo}, #{userNickname}, #{commentContent}, #{postDate})
+		VALUES(SEQ_TBL_COMMUNITY_COMMENT.nextval, #{userNo}, #{postNo}, #{userNickname}, #{commentContent}, sysdate)
 	</insert>
 	
 	<!-- 전체 게시글 조회 -->
