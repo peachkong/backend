@@ -11,27 +11,27 @@ String path = request.getContextPath();
   <title>봉사 활동 상세</title>
 
   <!-- base css 필수 삽입-->
-<link rel="stylesheet" href="<%=path%>/asset/css/core/reset.css">
-<link rel="stylesheet" href="<%=path%>/asset/css/core/variable.css">
-<link rel="stylesheet" href="<%=path%>/asset/css/core/Typography.css">
-<link rel="stylesheet" href="<%=path%>/asset/css/core/layout.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/reset.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/variable.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/Typography.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/layout.css">
 
-<link rel="stylesheet" href="<%=path%>/asset/css/component/pagination.css">
-<link rel="stylesheet" href="<%=path%>/asset/css/component/input.css">
-<link rel="stylesheet" href="<%=path%>/asset/css/component/button.css">
-<link rel="stylesheet" href="<%=path%>/asset/css/component/list.css">
-<link rel="stylesheet" href="<%=path%>/asset/css/component/card.css">
-<link rel="stylesheet" href="<%=path%>/asset/css/component/DetailCard.css">
-<link rel="stylesheet" href="<%=path%>/asset/css/component/badge.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/pagination.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/input.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/button.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/list.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/card.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/DetailCard.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/badge.css">
 
-<link rel="stylesheet" href="<%=path%>/asset/css/pages/volunteer-activity/volunAct-detail.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/volunteer-activity/volunAct-detail.css">
 
-<link rel="stylesheet" href="<%=path%>/asset/css/pages/volunteer-activity/volunAct-detail.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/volunteer-activity/volunAct-detail.css">
 
-<script defer src="<%=path%>/asset/js/pages/volunteer-activity/volunAct-detail.js"></script>
+<script defer src="${pageContext.request.contextPath}/asset/js/pages/volunteer-activity/volunAct-detail.js"></script>
 
   <!-- css 연결 -->
-  <link rel="stylesheet" href="<%=path%>/asset/css/pages/volunteer-activity/volunAct-detail.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/volunteer-activity/volunAct-detail.css">
   <!-- js 연결 -->
   <script defer src="${pageContext.request.contextPath}/asset/js/pages/volunteer-activity/volunAct-detail.js"></script>
   <!-- <script defer src="/Oulim/asset/js/pages/main/include.js"></script> -->
