@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
 
@@ -5,27 +7,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>post-list</title>
-  <!-- base css 필수 삽입-->
-  <link rel="stylesheet" href="/Oulim/asset/css/core/reset.css" />
-  <link rel="stylesheet" href="/Oulim/asset/css/core/variable.css" />
-  <link rel="stylesheet" href="/Oulim/asset/css/core/Typography.css" />
-  <!-- 컨포넌트 css 선택-->
-  <link rel="stylesheet" href="/Oulim/asset/css/component/pagination.css" />
-  <link rel="stylesheet" href="/Oulim/asset/css/component/input.css" />
-  <link rel="stylesheet" href="/Oulim/asset/css/component/button.css" />
-  <link rel="stylesheet" href="/Oulim/asset/css/component/list.css" />
-  <link rel="stylesheet" href="/Oulim/asset/css/component/card.css" />
-  <link rel="stylesheet" href="/Oulim/asset/css/component/DetailCard.css" />
-  <link rel="stylesheet" href="/Oulim/asset/css/component/badge.css" />
 
-  <link rel="stylesheet" href="/Oulim/admin/css/community-manage/post-list.css" />
-
-  <script defer src = "/Oulim/admin/js/community-manage/post-list.js"></script>
+    <!-- base css 필수 삽입-->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/reset.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/variable.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/Typography.css" />
+    <!-- 컨포넌트 css 선택-->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/pagination.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/input.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/button.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/list.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/card.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/DetailCard.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/badge.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/app/admin/css/community-manage/post-list.css" />
+  <script defer src="${pageContext.request.contextPath}/app/admin/js/community-manage/post-list.js"></script>
 </head>
 
 <body>
-  <!-- Header 자동 삽입 -->
-  <!-- <%@ include file="header.jsp" %> -->
+
 
   <main class="l-main">
     <!-- 사이드바 -->
@@ -43,7 +43,7 @@
       <nav class="sidebar-menu">
         <ul>
           <li class="menu-item">
-            <a href="/Oulim/admin/html/dashboard/dashboard.html">통계</a>
+            <a href="${pageContext.request.contextPath}/app/admin/jsp/dashboard/dashboard.jsp">통계</a>
           </li>
 
           <!-- 회원관리 -->
@@ -51,22 +51,24 @@
             <a href="#" class="menu-title"> 회원관리 </a>
 
             <ul class="submenu">
-              <li><a href="/Oulim/admin/html/member-manage/company-certification.html">기업회원</a></li>
-              <li><a href="/Oulim/admin/html/member-manage/mem-list.html">회원조회</a></li>
+              <li><a href="${pageContext.request.contextPath}/app/admin/jsp/member-manage/company-certification.jsp">기업회원</a></li>
+              <li><a href="${pageContext.request.contextPath}/app/admin/jsp/member-manage/mem-list.jsp">회원조회</a></li>
             </ul>
           </li>
 
           <!-- 봉사활동관리 -->
           <li class="menu-item dropdown">
-            <a href="/Oulim/admin/html/volunteer-manage/volun-list.html" class="menu-title"> 봉사활동관리 </a>
+            <a href="${pageContext.request.contextPath}/app/admin/jsp/volunteer-manage/volun-list.jsp" class="menu-title"> 봉사활동관리 </a>
           </li>
 
           <!-- 게시판관리 -->
           <li class="menu-item dropdown">
-            <a href="/Oulim/admin/html/community-manage/post-list.html" class="menu-title"> 게시판관리 </a>
+            <a href="${pageContext.request.contextPath}/app/admin/jsp/community-manage/post-list.jsp" class="menu-title"> 게시판관리 </a>
           </li>
+        </ul>
       </nav>
     </aside>
+
 
       <section class="l-content">
         <!-- 메인 위에 헤더 -->
@@ -108,22 +110,22 @@
                 <input type="checkbox" />
                 <span class="c-checkbox__box"></span>
               </label>
-              <span class="c-list__col">
+              <span class="c-list__col clicktitle">
                 1
               </span>
-              <span class="c-list__col">
+              <span class="c-list__col clicktitle">
                 아무개
               </span>
-              <span class="c-list__col">
+              <span class="c-list__col clicktitle">
                 제목입니다
               </span>
-              <span class="c-list__col">
+              <span class="c-list__col clicktitle">
                 2023-01-15
               </span>
-              <span class="c-list__col">
+              <span class="c-list__col clicktitle">
                 11
               </span>
-              <span class="c-list__col">
+              <span class="c-list__col clicktitle">
                 1000
               </span>
               <div class="c-list__actions">
@@ -139,22 +141,22 @@
                 <input type="checkbox" />
                 <span class="c-checkbox__box"></span>
               </label>
-              <span class="c-list__col">
+              <span class="c-list__col clicktitle">
                 1
               </span>
-              <span class="c-list__col">
+              <span class="c-list__col clicktitle">
                 아무개
               </span>
-              <span class="c-list__col">
+              <span class="c-list__col clicktitle">
                 제목입니다
               </span>
-              <span class="c-list__col">
+              <span class="c-list__col clicktitle">
                 2023-01-15
               </span>
-              <span class="c-list__col">
+              <span class="c-list__col clicktitle">
                 11
               </span>
-              <span class="c-list__col">
+              <span class="c-list__col clicktitle">
                 1000
               </span>
               <div class="c-list__actions">
@@ -168,22 +170,22 @@
                 <input type="checkbox" />
                 <span class="c-checkbox__box"></span>
               </label>
-              <span class="c-list__col">
+              <span class="c-list__col clicktitle">
                 1
               </span>
-              <span class="c-list__col">
+              <span class="c-list__col clicktitle">
                 아무개
               </span>
-              <span class="c-list__col">
+              <span class="c-list__col clicktitle">
                 제목입니다
               </span>
-              <span class="c-list__col">
+              <span class="c-list__col clicktitle">
                 2023-01-15
               </span>
-              <span class="c-list__col">
+              <span class="c-list__col clicktitle">
                 11
               </span>
-              <span class="c-list__col">
+              <span class="c-list__col clicktitle">
                 1000
               </span>
               <div class="c-list__actions">
@@ -197,22 +199,22 @@
                 <input type="checkbox" />
                 <span class="c-checkbox__box"></span>
               </label>
-              <span class="c-list__col">
+              <span class="c-list__col clicktitle">
                 1
               </span>
-              <span class="c-list__col">
+              <span class="c-list__col clicktitle">
                 아무개
               </span>
-              <span class="c-list__col">
+              <span class="c-list__col clicktitle">
                 제목입니다
               </span>
-              <span class="c-list__col">
+              <span class="c-list__col clicktitle">
                 2023-01-15
               </span>
-              <span class="c-list__col">
+              <span class="c-list__col clicktitle">
                 11
               </span>
-              <span class="c-list__col">
+              <span class="c-list__col clicktitle">
                 1000
               </span>
               <div class="c-list__actions">
@@ -247,8 +249,6 @@
   </main>
 
 
-  <!-- Footer 자동 삽입 -->
-  <!-- <%@ include file="footer.jsp" %> -->
 </body>
 
 </html>

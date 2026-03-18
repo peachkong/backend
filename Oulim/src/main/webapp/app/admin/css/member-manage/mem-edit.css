@@ -1,0 +1,214 @@
+@charset "UTF-8";
+
+/* 전체 레이아웃 */
+
+body {
+  min-height: 100vh;
+}
+
+.l-main {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* 사이드바 */
+
+aside {
+  /* width: 200px;
+    color: white;
+    
+    display: flex;
+    flex-direction: column;
+    */
+  background-color: #3e7d08;
+  width: 240px;
+  min-width: 240px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+/* 관리자 영역 */
+
+.adminnow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 20px;
+  margin-bottom: 100px;
+}
+
+/* 메뉴 기본  */
+
+.sidebar-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  /* border: 1px solid black; */
+}
+
+/* 메뉴 아이템 */
+
+.menu-item {
+  border-bottom: 3px solid rgb(191, 191, 191);
+}
+
+/* 메뉴 링크 */
+
+.menu-title,
+.menu-item a {
+  display: block;
+  width: 100%;
+  padding: 15px 20px;
+
+  color: white;
+  text-decoration: none;
+
+  cursor: pointer;
+  /* border: 1px solid black; */
+}
+
+/* hover 효과 */
+
+.menu-item:hover {
+  background: #6dda08;
+}
+
+/* 드롭다운 기본 숨김 */
+
+.submenu {
+  display: none;
+  background: #6dda08;
+}
+
+/* hover 시 드롭다운 열림 */
+
+.dropdown:hover .submenu {
+  display: block;
+
+  /* border: 1px solid black; */
+}
+
+/* 서브메뉴 스타일 */
+
+.submenu li a {
+  display: block;
+  padding: 12px 30px;
+}
+
+.submenu li a:hover {
+  background: #51af01;
+
+  border: 1px solid black;
+}
+
+/* 메인위에 헤더 */
+.header {
+  padding-bottom: 30px;
+
+  border-bottom: 1px solid #ddd;
+
+  margin-bottom: 100px;
+}
+
+/* 메인 내용영역*/
+
+.l-content {
+  flex: 1;
+  background: #f0f0f0;
+  border: 1px solid black;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  padding: 30px;
+  /* align-items: center; */
+}
+
+#content-area {
+  background: white;
+  border-radius: 5px;
+
+  display: flex;
+  align-items: left;
+  gap: 50px;
+
+  padding: 20px;
+
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  width: 900px;
+}
+
+#userNickname {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#myPoint {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.c-input {
+  width: 400px;
+}
+
+/* ==============포인트 페이지 긁음 */
+
+.l-mypage--content {
+  width: 700px;
+  justify-content: center;
+}
+
+.p-point-history--header {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  align-items: center;
+  height: 100px;
+}
+
+.p-point-history--body {
+  padding: 30px;
+}
+
+.p-point-history--pagination > nav {
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.p-point-history--nav > nav {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.p-point-history--earn-list > ul > li {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0;
+  align-items: center;
+}
+
+.p-point-history--use-list > ul > li {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0;
+  align-items: center;
+}
+
+#plus {
+  cursor: pointer;
+  flex: 1;
+}
+
+#a {
+  display: block;
+}

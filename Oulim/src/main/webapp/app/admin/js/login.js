@@ -18,10 +18,10 @@ pwEye.addEventListener("click", function(){
 
   if (userPw.type === "password") {
     userPw.type = "text";
-    pwEye.src = "/Oulim/asset/image/user/password-on.png";
+    pwEye.src = "${pageContext.request.contextPath}/asset/image/user/password-on.png";
   } else {
     userPw.type = "password";
-    pwEye.src = "/Oulim/asset/image/user/password-off.png";
+    pwEye.src = "${pageContext.request.contextPath}/asset/image/user/password-off.png";
   }
 });
 
