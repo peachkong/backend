@@ -33,9 +33,10 @@
     	const contextPath = "${pageContext.request.contextPath}";
     	const postNo = "${post.postNo}";
     	const userNo = "${post.userNo}";
-    	const isLogin = ${not empty sessionScope.userNo};
-    	const loginUserNo = ${sessionScope.userNo};
+    	const isLogin = ${not empty sessionScope.userNo ? 'true' : 'false'};
+    	const loginUserNo = ${sessionScope.userNo != null ? sessionScope.userNo : -1};
     	const userType = ${sessionScope.userType != null ? sessionScope.userType : -1};
+    	const userNickname = "${sessionScope.userNickname != null ? sessionScope.userNickname : ''}";
     </script>
   </head>
   <body>
@@ -81,16 +82,16 @@
             <div class="comment-content">댓글내용</div>
           </div>
           <div class="l-community-comment-writebox">
-            <textarea
-              class="c-comment-textarea"
-              placeholder="댓글 입력"
-            ></textarea>
+             <textarea              
+	              class="c-comment-textarea"
+	              id="commentContent"
+    	          placeholder="댓글 입력"
+        	    ></textarea>
             <div class="c-comment-post-btn">
-              <button class="c-button c-button--primary c-button--lg">댓글 작성</button>
-            </div>
+            	<button id="commentPostBtn" class="c-button c-button--primary c-button--lg">댓글 작성</button>
+           	 </div>
           </div>
         </div>
-
         <div class="l-return-button">
           <button class="c-button c-button--primary c-button--lg">목록으로 돌아가기</button>
         </div>

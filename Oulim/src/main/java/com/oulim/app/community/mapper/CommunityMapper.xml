@@ -45,7 +45,7 @@
 	<!-- 댓글 작성 -->
 	<insert id="commentInsert" parameterType="CommunityCommentDTO">
 		INSERT INTO TBL_COMMUNITY_COMMENT (COMMENT_NO, USER_NO, POST_NO, USER_NICKNAME, COMMENT_CONTENT, POST_DATE)
-		VALUES(SEQ_TBL_COMMUNITY_COMMENT.nextval, #{userNo}, #{postNo}, #{userNickname}, #{commentContent}, #{postDate})
+		VALUES(SEQ_TBL_COMMUNITY_COMMENT.nextval, #{userNo}, #{postNo}, #{userNickname}, #{commentContent}, sysdate)
 	</insert>
 	
 	<!-- 전체 게시글 조회 -->

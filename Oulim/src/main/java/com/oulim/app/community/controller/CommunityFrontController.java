@@ -77,6 +77,8 @@ public class CommunityFrontController extends HttpServlet {
 		
 		case "/community/commentPost.commu"->{
 			System.out.println("댓글 등록");
+			result = new CommunityCommentPostOkController().execute(request, response);
+			System.out.println("댓글 등록 완료");
 		}
 		
 		case "/community/postOK.commu" ->{
