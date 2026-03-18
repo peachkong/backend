@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mypage">
 <!-- 1. 마이페이지 진입 -->
-<select id="enterMyPage" parameterType="int" resultType="int">
-	SELECT user_pw FROM tbl_user WHERE = #{userNo}
+<select id="enterMyPage" parameterType="int" resultType="string">
+	SELECT user_pw FROM tbl_user WHERE user_no = #{userNo}
 </select>
 
 
@@ -50,7 +51,7 @@ GROUP BY
 
 <!-- 완료봉사, 예정봉사, 포인트 획득 간소화한 정보 출력 -->
 
-<select id="miniPoint" parameterType="int" resultType="MyPagePointDTO">
+<select id="miniPoint" parameterType="int" resultType="MyPageJoinDTO">
 
 <![CDATA[
 SELECT
@@ -170,7 +171,7 @@ ORDER BY tva.volun_act_no DESC
 
 <!-- 6. 포인트 사용 내역 조회 -->
 
-<select id="minusPoint" parameterType="int" resultType="MyPagePointDTO">
+<select id="minusPoint" parameterType="int" resultType="MyPageJoinDTO">
 
 <![CDATA[
 SELECT log_reason, TO_CHAR(LOG_DATE, 'YYYY.MM.DD'), change_amount 
@@ -185,7 +186,7 @@ ORDER BY LOG_NO DESC
 
 <!-- 7. 포인트 적립 내역 조회 -->
 
-<select id="plusPoint" parameterType="int" resultType="MyPagePointDTO">
+<select id="plusPoint" parameterType="int" resultType="MyPageJoinDTO">
 
 <![CDATA[
 SELECT log_reason, TO_CHAR(LOG_DATE, 'YYYY.MM.DD'), change_amount 

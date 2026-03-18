@@ -10,6 +10,7 @@ public class PointJoinDTO {
 	private int changeAmount; 
 	private String logReason; 
 	private String logDate;
+	
 	public int getCurrencyId() {
 		return currencyId;
 	}

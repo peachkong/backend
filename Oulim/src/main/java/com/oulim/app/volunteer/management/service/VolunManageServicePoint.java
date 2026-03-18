@@ -1,21 +1,21 @@
 package com.oulim.app.volunteer.management.service;
 
-import java.io.IOException;
+import com.oulim.app.volunteer.dao.VolunteerMangementDAO;
+import com.oulim.app.volunteer.dto.PointJoinDTO;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+public class VolunManageServicePoint  {
 
-import com.oulim.app.common.controller.Execute;
-import com.oulim.app.common.controller.Result;
+	public void attendanceProcess(PointJoinDTO pointJoinDTO, String[] userNos) {
+		 VolunteerMangementDAO volunteerMangementDAO = new VolunteerMangementDAO();
+	    for (String userNoStr : userNos) {
+	        int userNo = Integer.parseInt(userNoStr);
 
-public class VolunManageServicePoint implements Execute {
+	        pointJoinDTO.setUserNo(userNo);
+	        pointJoinDTO.setCurrencyId(1);
+	        pointJoinDTO.setLogReason("출석 포인트 지급");
 
-	@Override
-	public Result execute(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		return null;
+	        volunteerMangementDAO.updateCurrency(pointJoinDTO);
+//	        volunteerMangementDAO.insertPointLog(pointJoinDTO);
+	    }
 	}
-
 }

@@ -29,7 +29,7 @@ public class MyPageCheckOkController implements Execute{
 		String userPw = request.getParameter("userPw");
 		String userPw2 = (String)mypageDAO.enterMyPage1(userNo);
 		
-		
+		System.out.println(userNo);
 		
 		if(userNo == null) {
 			path = "/app/mypage/check/check.jsp"; // 일단 내 페이지로 > 테스트용
@@ -42,7 +42,7 @@ public class MyPageCheckOkController implements Execute{
 		
 		if(userPw == userPw2) {
 			
-			result.setPath("/app/mypage/profile/profile.jsp");
+			result.setPath(request.getContextPath() + "/app/mypage/profile/profile.jsp");
 			result.setRedirect(true);
 			return result;
 			

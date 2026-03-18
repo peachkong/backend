@@ -53,6 +53,7 @@ public class MyPageFrontController extends HttpServlet {
 			break;
 			
 		case "/mypage/checkOk.mp":
+			System.out.println("마이페이지 진입 성공");
 			result = new MyPageCheckOkController().execute(request, response);
 			break;
 			
