@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="VolunteerManagement">
 	<!--포인트 지급-->
-	<update id="updateCurrency" parameterType="PointJoinDTO" >
+	<update id="updateCurrency" parameterType="PointJoinDTO">
 		MERGE INTO TBL_CURRENCY c
 		USING (
 			SELECT
@@ -20,6 +20,35 @@
 		WHEN NOT MATCHED THEN
 			INSERT (Currency_ID, User_No, Total_Amount)
 			VALUES (src.Currency_ID, src.User_No, src.Change_Amount)
+	</update>
+
+	<!-- 포인트 로그 저장 -->
+	<insert id="insertPointLog" parameterType="PointJoinDTO">
+		INSERT INTO TBL_LOG_POINT (
+			LOG_NO,
+			USER_NO,
+			CURRENCY_ID,
+			CHANGE_AMOUNT,
+			LOG_REASON,
+			LOG_DATE
+		) VALUES (
+			SEQ_TBL_LOG_POINT.NEXTVAL,
+			#{userNo},
+			#{currencyId},
+			#{changeAmount},
+			#{logReason},
+			SYSDATE
+		)
+	</insert>
+	
+	<!-- 봉사자 상태 변경 -->
+	<update id="updateAttendanceStatus" parameterType="VolunApplyDTO">
+		UPDATE TBL_VOLUN_APPLY
+		SET VOLUNACT_APPLYSTATUS = 0,
+	    VOLUNACT_ATTENDANCE = #{volunActAttendance}
+		WHERE VOLUN_ACT_NO = #{volunActNo}
+	 	AND USER_NO = #{userNo}
+	 	AND VOLUNACT_APPLYSTATUS = 1
 	</update>
 	
 	<!--봉사 삭제  -->
@@ -56,7 +85,8 @@
 			A.VOLUN_ACT_NO AS volunActNo,
 			A.USER_NO AS userNo,
 			U.USER_NAME AS userName,
-			U.USER_BIRTH AS userBirth,
+			TO_CHAR(U.USER_BIRTH, 'YYYY.MM.DD') AS userBirth,
+			FLOOR(MONTHS_BETWEEN(SYSDATE, U.USER_BIRTH) / 12) AS userAge,
 			TO_CHAR(A.VOLUNACT_APPLYDATE, 'YYYY.MM.DD') AS volunActApplyDate,
 			A.VOLUNACT_APPLYSTATUS AS volunActApplyStatus,
 			A.VOLUNACT_ATTENDANCE AS volunActAttendance

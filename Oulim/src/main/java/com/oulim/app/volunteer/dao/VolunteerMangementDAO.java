@@ -56,5 +56,15 @@ public class VolunteerMangementDAO {
 	public void updateCurrency(PointJoinDTO pointjoinDTO ) {
 		sqlSession.update("VolunteerManagement.updateCurrency", pointjoinDTO);
 	}
+	
+	// 포인트 로그 추가
+	public void insertPointLog(PointJoinDTO pointJoinDTO) {
+		sqlSession.insert("VolunteerManagement.insertPointLog", pointJoinDTO);
+	}
+
+	// 봉사자 상태 변경
+	public int updateAttendanceStatus(VolunApplyDTO volunApplyDTO) {
+		return sqlSession.update("VolunteerManagement.updateAttendanceStatus", volunApplyDTO);
+	}
 
 }

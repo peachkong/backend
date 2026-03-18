@@ -139,6 +139,9 @@
 					</div>
 				</div>
 			</div>
+		<form action="${pageContext.request.contextPath}/volunteer-manage/attendance.vm" method="post">
+			<input type="hidden" name="volunActNo" value="${volunDetail.volunActNo}">
+			<input type="hidden" name="changeAmount" value="${volunDetail.volunActPoint}">
 		
 		<div class="c-list c-list--5col">
 			<div class="c-list__header">
@@ -161,9 +164,15 @@
 										data-volun-act-no="${apply.volunActNo}">
 								</span>
 								<span class="c-list__col">${apply.userName}</span>
-								<span class="c-list__col">${apply.userBirth}</span>
+								<span class="c-list__col">${apply.userAge}</span>
 								<span class="c-list__col">${apply.volunActApplyDate}</span>
-								<span class="c-list__col">-</span>
+								<span class="c-list__col">
+									<c:choose>
+										<c:when test="${apply.volunActAttendance == 1}">출석</c:when>
+										<c:when test="${apply.volunActAttendance == 2}">결석</c:when>
+										<c:otherwise>미처리</c:otherwise>
+									</c:choose>
+								</span>
 							</div>
 						</c:forEach>
 					</c:when>
@@ -181,10 +190,10 @@
 			</div>
 		</div>
 					<div class="b-btn-layout">
-							<button class="c-button c-button--primary c-button--md">출석</button>
-							<button class="c-button c-button--secondary c-button--md">결석</button>
+							<button type="submit" name="attendanceStatus" value="1" class="c-button c-button--primary c-button--md">출석</button>
+							<button type="submit" name="attendanceStatus" value="2" class="c-button c-button--secondary c-button--md">결석</button>
 					</div>
-
+			</form>
 			<!-- 페이지네이션  c-pagination-->
 			<nav class="c-pagination">
 				<!-- <a class="c-pagination__link is-disabled">‹</a> <a
