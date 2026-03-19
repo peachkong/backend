@@ -46,7 +46,7 @@ pageEncoding="UTF-8"%>
           오신것을 환영합니다.
         </h1>
         <!-- 로그인 폼 -->
-        <form action="login" method="POST">
+        <form action="${pageContext.request.contextPath}/admin/loginOk.adm" method="POST">
           <!-- 아이디 -->
           <div class="l-login-input-layout">
             <label for="adminId">아이디</label>

@@ -56,9 +56,9 @@ public class AdminFrontController extends HttpServlet {
 		Execute execute = null;
 		switch(target) {
 		
-		case "/admin/login.adm" ->
+		case "/admin/login.adm"->
 			{
-				System.out.println("로그인 페이지 요청");
+				System.out.println("111로그인 페이지 요청");
 				result = new AdminLoginController().execute(request, response);
 				System.out.println();	
 			}
