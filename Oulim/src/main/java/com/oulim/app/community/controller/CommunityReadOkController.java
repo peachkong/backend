@@ -12,6 +12,7 @@ import com.oulim.app.common.controller.Execute;
 import com.oulim.app.common.controller.Result;
 import com.oulim.app.community.dao.CommunityDAO;
 import com.oulim.app.community.dao.CommunityFileDAO;
+import com.oulim.app.community.dto.CommunityCommentDTO;
 import com.oulim.app.community.dto.CommunityPostJoinDTO;
 import com.oulim.app.community.dto.PostImageDTO;
 
@@ -54,6 +55,9 @@ public class CommunityReadOkController implements Execute{
 	      
 	    postJoinDTO.setImages(imageList);	 
 	      			
+	    // 댓글 가져오기
+	    List<CommunityCommentDTO> commentList = commuDAO.selectCommentList(null);
+	    
 	    Integer loginUserNo = (Integer) request.getSession().getAttribute("userNo");
 	    System.out.println("로그인 유저 번호");
 	    

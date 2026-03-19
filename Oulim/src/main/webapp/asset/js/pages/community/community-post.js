@@ -18,13 +18,10 @@ const title = document.querySelector(".c-community-post-title .c-input");
 const cancelBtn = document.querySelector(
 	".l-community-post-btn-group .c-button-group #cancel-button",
 )
-
-const isLogin = true;
-const userType = "USER";
 const USER_TYPE = {
-	ADMIN: "ADMIN",
-	USER: "USER",
-	COMPANY: "COMPANY",
+	ADMIN: 0,
+	USER: 1,
+	COMPANY: 2
 };
 
 postContent.addEventListener("input", () => {
@@ -116,7 +113,7 @@ fileInput.addEventListener('change', (event) => {
 			<img src="${src}" alt="${file.name}">
 			</div>
 		<div class="btn-box">
-		    <button type='c-button' class='img-cancel-btn' data-name='${file.name}'>삭제</button>
+		    <button type='button' class='img-cancel-btn' data-name='${file.name}'>삭제</button>
 		</div>
 		`;
 		fileList.appendChild(listItem);

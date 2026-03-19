@@ -34,6 +34,9 @@
   
   <script>
    	const contextPath = "${pageContext.request.contextPath}";
+	const isLogin = ${not empty sessionScope.userNo};
+	const loginUserNo = ${sessionScope.userNo};
+	const userType = ${sessionScope.userType != null ? sessionScope.userType : -1};
   </script>
 </head>
 

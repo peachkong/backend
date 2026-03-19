@@ -12,6 +12,7 @@ public class CommunityPostJoinDTO {
 	private String userNickname;
 	private int likeCount;
 	private List<PostImageDTO> images;
+	private List<CommunityCommentDTO> comments;
 	public int getPostNo() {
 		return postNo;
 	}
@@ -67,9 +68,19 @@ public class CommunityPostJoinDTO {
 	public void setImages(List<PostImageDTO> images) {
 		this.images = images;
 	}
+	
+	public List<CommunityCommentDTO> getComments() {
+		return comments;
+	}
+	public void setComments(List<CommunityCommentDTO> comments) {
+		this.comments = comments;
+	}
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
+		return "CommunityPostJoinDTO [postNo=" + postNo + ", userNo=" + userNo + ", postTitle=" + postTitle
+				+ ", postContent=" + postContent + ", postDate=" + postDate + ", postViewCount=" + postViewCount
+				+ ", userNickname=" + userNickname + ", likeCount=" + likeCount + ", images=" + images + ", comments="
+				+ comments + "]";
 	}
+
 }

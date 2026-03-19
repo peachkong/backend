@@ -52,12 +52,17 @@ public class CommunityFrontController extends HttpServlet {
 			result = new CommunityWriteController().execute(request, response);
 			System.out.println("봉사후기 등록 페이지 이동 완료");
 		}
-		
-		case "/community/rePost.commu" ->{
-			System.out.println("게시글 수정");
+		case "/community/repost.commu" ->{
+			System.out.println("게시글 수정이동");
 			result = new CommunityUpdateController().execute(request, response);
 			System.out.println("게시글 수정 페이지 이동 완료");
 		}
+		
+		case "/community/repostOk.commu" ->{
+			System.out.println("게시글 수정이동");
+			result = new CommunityUpdateOkController().execute(request, response);
+			System.out.println("게시글 수정 페이지 이동 완료");
+		}			
 		
 		case "/community/detail.commu" ->{
 			System.out.println("봉사후기 상세보기");
@@ -72,6 +77,8 @@ public class CommunityFrontController extends HttpServlet {
 		
 		case "/community/commentPost.commu"->{
 			System.out.println("댓글 등록");
+			result = new CommunityCommentPostOkController().execute(request, response);
+			System.out.println("댓글 등록 완료");
 		}
 		
 		case "/community/postOK.commu" ->{
@@ -82,6 +89,8 @@ public class CommunityFrontController extends HttpServlet {
 		
 		case "/community/postDelete.commu" ->{
 			System.out.println("후기 삭제");
+			result = new CommunityDeleteOkController().execute(request, response);
+			System.out.println("후기 삭제 완료");
 		}
 		}
 		

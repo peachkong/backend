@@ -37,8 +37,8 @@ public class PostImageDTO {
 	}
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
+		return "PostImageDTO [imageNo=" + imageNo + ", postNo=" + postNo + ", postImgSystemName=" + postImgSystemName
+				+ ", postImgOriginName=" + postImgOriginName + "]";
 	}
-	
+
 }

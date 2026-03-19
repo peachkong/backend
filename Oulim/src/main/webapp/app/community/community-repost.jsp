@@ -30,6 +30,10 @@
   <script defer src="${pageContext.request.contextPath}/asset/js/pages/main/include.js"></script>
   <script>
    	const contextPath = "${pageContext.request.contextPath}";
+	const postNo = "${post.postNo}";
+	const isLogin = ${not empty sessionScope.userNo};
+	const loginUserNo = ${sessionScope.userNo != null ? sessionScope.userNo : -1};
+	const userType = ${sessionScope.userType != null ? sessionScope.userType : -1};
   </script>
 </head>
 <!-- js 연결 -->
@@ -47,23 +51,24 @@
             <h2>봉사 후기 수정</h2>
           </div>
 
-          <form action="${pageContext.request.contextPath}/community/repostOk.commu">
+          <form action="${pageContext.request.contextPath}/community/repostOk.commu" method="post" id="write-form" enctype="multipart/form-data">
+          <input type="hidden" name="postNo" value="${post.postNo}">
             <div class="l-community-repost-top">
               <div class="c-delete-post-btn">
-                <button class="c-warning-delete-button">삭제</button>
+                <button type="button" id="deleteBtn" class="c-warning-delete-button">삭제</button>
               </div>
             </div>
             <div class="l-community-repost-main">
               <div class="c-community-repost-title">
                 <label for=""><b>제목</b></label>
                 <!-- 컴포넌트 c-input 사용 -->
-                <input class="c-input" type="text" name="" id="" placeholder="후기 제목 입력" />
+                <input class="c-input" type="text" name="postTitle" id="title" placeholder="후기 제목 입력" value="${post.postTitle}" required/>
               </div>
 
               <div class="l-community-repost-detail">
-                <label><b>상세 내용 작성</b>
+                <label for="content"><b>상세 내용 작성</b></label>
               </div>
-              <textarea class="c-textarea" placeholder="후기를 작성해주세요"></textarea>
+              <textarea class="c-textarea" id="content" name="postContent" placeholder="후기를 작성해주세요">${post.postContent}</textarea>
             </div>
 
             <div class="l-community-repost-img-attach">
@@ -71,12 +76,20 @@
               <div class="c-community-repost-img-attatch-label">
                 <label>이미지 등록</label>
               </div>
-              <div class="c-community-repost-img-row">
-                <input type="text" class="c-community-repost-file-name" value="대표이미지.jpg" readonly>
-                <label for="imageInput" class="c-file-btn">파일 추가</label>
-                <input type="file" id="imageInput" accept="image/*">
+              <div class="c-community-repost-img-row">              
+  	            <input type="text" class="c-community-repost-file-name" value="${not empty post.images ? post.images[0].postImgOriginName : '대표이미지.jpg'}" readonly>
+                <label for="file" class="c-file-btn">파일 추가</label>
+                <style>#file{display:none !important}</style>
+                <input type="file" id="file" name="postImage" accept="image/*">
               </div>
             </div>
+            
+            <div class="c-community-repost-preview">
+    			<ul class="file-list">
+    				
+    			</ul>
+  			</div>
+            
             <div class="l-community-repost-btn-group">
               <!-- 공용 컴포넌트 투버튼 c-button-group  -->
               <div class="c-button-group">
