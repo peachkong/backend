@@ -29,7 +29,10 @@
 	href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
 <script defer
 	src="${pageContext.request.contextPath}/asset/js/pages/user/signin/signup-verify-company.js"></script>
-</head> 
+<script>
+	const contextPath = "${pageContext.request.contextPath}";
+</script>
+</head>
 
 <body>
 	<jsp:include page="/app/include/header.jsp" />
@@ -38,7 +41,8 @@
 			<div class="p-signup-verify-company-main">
 				<form
 					action="${pageContext.request.contextPath}/user/organJoinFirstOk.usr"
-					method="post">
+					method="post" enctype="multipart/form-data">
+
 					<div class="l-signup-verify-company-layout">
 						<div>
 							<h2>회원가입</h2>
@@ -74,49 +78,33 @@
 								class="c-input" placeholder="사업자 등록 번호를 입력해주세요" />
 							<p id="is-company-user-name-error" class="is-error-text"></p>
 						</div>
+
 						<div class="c-signup-verify-company-input">
 							<h6>이메일</h6>
-							<input type="text" name="userEmail" id="company-email"
-								class="c-input" placeholder="이메일을 입력해주세요" />
-							<p id="is-company-email-error" class="is-error-text"></p>
-						</div>
-						<div class="c-signup-verify-company-input-number">
-							<h6>인증번호</h6>
-							<div class="l-signup-verify-company-number-layout">
-								<div>
-									<input type="text" name="" id="" class="c-input"
-										placeholder="인증번호입력" />
-									<div class="c-signup-verify-company-numbertime">3:00</div>
+							<div class="l-signup-info-company-input-layout">
+								<div class="c-signup-verify-company-input">
+									<input type="text" name="userEmail" id="company-email"
+										class="c-input" placeholder="이메일을 입력해주세요" />
+									<p id="is-company-email-error" class="is-error-text"></p>
 								</div>
-								<div>
-									<button class="c-button c-button--secondary c-button--md">
-										인증확인</button>
+								<div class="c-signup-company-btn">
+									<button type="button"
+										class="c-button c-button--secondary c-button--md"
+										id="company-email-check-btn">중복확인</button>
 								</div>
 							</div>
 						</div>
 						<div class="c-signup-verify-company-input-file">
-							<h6>사업자 등록증 사본</h6>
+							<h6>파일 첨부 (재직증명서 사본과 사업자등록증 사본을 하나의 pdf로 올려주세요)</h6>
 							<div>
-								<input type="text" name="" id="company-file-name-1"
-									class="c-siginup-verify-company-filename" placeholder="사본 등록"
-									readonly /> <input type="file" name="" id="company-file-1"
+								<input type="text" id="company-file-name-1"
+									class="c-siginup-verify-company-filename"
+									placeholder="재직증명서 사업자등록증 합본" readonly /> <input type="file"
+									name="certFile" id="company-file-1"
 									class="c-siginup-verify-company-file" />
 								<div class="c-signup-company-btn">
 									<button class="c-button c-button--secondary c-button--md"
 										type="button" id="company-file-btn-1">첨부파일</button>
-								</div>
-							</div>
-						</div>
-						<div class="c-signup-verify-company-input-file">
-							<h6>사업자 등록증 사본</h6>
-							<div>
-								<input type="text" name="" id="company-file-name-2"
-									class="c-siginup-verify-company-filename" placeholder="사본 등록"
-									readonly /> <input type="file" name="" id="company-file-2"
-									class="c-siginup-verify-company-file" />
-								<div class="c-signup-company-btn">
-									<button class="c-button c-button--secondary c-button--md"
-										type="button" id="company-file-btn-2">첨부파일</button>
 								</div>
 							</div>
 						</div>

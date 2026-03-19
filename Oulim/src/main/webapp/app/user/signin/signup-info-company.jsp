@@ -47,7 +47,8 @@
 				<input type="hidden" name="userBirth" value="${userBirth}">
 				<input type="hidden" name="organCertNum" value="${organCertNum}">
 				<input type="hidden" name="userEmail" value="${userEmail}">
-				
+				<input type="hidden" name="organFileSystemName" value="${organFileSystemName}">
+				<input type="hidden" name="organFileOriginalName" value="${organFileOriginalName}">
 				<div class="p-signup-info-company">
 					<div class="l-signup-info-company-layout">
 						<div>

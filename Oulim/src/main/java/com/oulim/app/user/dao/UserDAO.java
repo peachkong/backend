@@ -14,6 +14,22 @@ public class UserDAO {
         sqlSession = MyBatisConfig.getSqlSessionFactory().openSession(true);
     }
     
+    public int checkId(String userId) {
+    	return sqlSession.selectOne("user.chkUserId", userId);
+    }
+    
+    public int checkEmail(String userEmail) {
+    	return sqlSession.selectOne("user.chkUserEmail", userEmail);
+    }
+    
+    public int checkNickname(String userNickname) {
+    	return sqlSession.selectOne("user.chkUserId", userNickname);
+    }
+    
+    public int checkPhoneNum(String userPhoneNum) {
+    	return sqlSession.selectOne("user.chkUserPhoneNum", userPhoneNum);
+    }
+    
     public void normaljoin(UserDTO userDTO) {
     	sqlSession.insert("user.normaljoin", userDTO);
     }

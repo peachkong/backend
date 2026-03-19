@@ -3,15 +3,15 @@
 <mapper namespace="user">
 
 	<!-- 아이디 중복체크 -->
-	<select id="countByUserId" parameterType="string"
-		resultType="int">
-		SELECT COUNT(*)
+	<select id="chkUserId" parameterType="string" resultType="int">
+		SELECT
+		COUNT(*)
 		FROM TBL_USER
 		WHERE USER_ID = #{userId}
 	</select>
 
 	<!-- 이메일 중복체크 -->
-	<select id="countByUserEmail" parameterType="string"
+	<select id="chkUserEmail" parameterType="string"
 		resultType="int">
 		SELECT COUNT(*)
 		FROM TBL_USER
@@ -19,7 +19,7 @@
 	</select>
 
 	<!-- 닉네임 중복체크 -->
-	<select id="countByUserNickname" parameterType="string"
+	<select id="chkUserNickname" parameterType="string"
 		resultType="int">
 		SELECT COUNT(*)
 		FROM TBL_USER
@@ -28,7 +28,7 @@
 	</select>
 
 	<!-- 폰번호 중복체크 -->
-	<select id="countByUserPhoneNum" parameterType="string"
+	<select id="chkUserPhoneNum" parameterType="string"
 		resultType="int">
 		SELECT COUNT(*)
 		FROM TBL_USER
@@ -76,7 +76,7 @@
 		FROM TBL_ORGAN
 		WHERE ORGAN_CERT_NUM = #{value}
 	</select>
-	
+
 	<!-- 기관 등록 -->
 	<insert id="insertorgan" parameterType="OrganDTO">
 		<selectKey keyProperty="organNo" resultType="int"
@@ -94,6 +94,26 @@
 		)
 	</insert>
 
+	<!-- 파일 추가 -->
+	<insert id="insertPdf" parameterType="OrganCertDTO">
+		<selectKey keyProperty="organCertNo" resultType="int"
+			order="BEFORE">
+			SELECT SEQ_TBL_ORGAN_CERT.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO TBL_ORGAN_CERT (
+		ORGAN_CERT_NO,
+		USER_NO,
+		ORGAN_NO,
+		ORGAN_FILE_SYSTEM_NAME,
+		ORGAN_FILE_ORIGINAL_NAME
+		) VALUES (
+		#{organCertNo},
+		#{userNo},
+		#{organNo},
+		#{organFileSystemName},
+		#{organFileOriginalName}
+		)
+	</insert>
 
 	<!-- 기업회원 가입 -->
 	<insert id="organjoin" parameterType="UserDTO">
@@ -117,7 +137,8 @@
 		#{userName},
 		#{userId},
 		#{userPw},
-		TO_DATE(#{userBirth}, 'YYYY-MM-DD'),
+		TO_DATE(#{userBirth},
+		'YYYY-MM-DD'),
 		#{userEmail},
 		2,
 		2,
@@ -139,7 +160,7 @@
 	</select>
 
 	<!-- 아이디 찾기 쿼리 -->
-	<select id="findId" parameterType="userDTO" resultType="string">
+	<select id="findId" parameterType="UserDTO" resultType="string">
 		SELECT
 		USER_ID
 		FROM TBL_USER
@@ -178,7 +199,8 @@
 
 	<!-- 실제 존재하는 유저인지 체크하는 쿼리 -->
 	<select id="checkUserNo" parameterType="int">
-		SELECT user_no FROM TBL_USER
+		SELECT user_no FROM
+		TBL_USER
 		WHERE user_no = #{userNo}
 	</select>
 

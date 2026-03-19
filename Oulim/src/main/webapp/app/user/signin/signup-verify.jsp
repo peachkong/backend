@@ -30,6 +30,9 @@
 	href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
 <script defer
 	src="${pageContext.request.contextPath}/asset/js/pages/user/signin/signup-verify.js"></script>
+<script>
+	const contextPath = "${pageContext.request.contextPath}";
+</script>
 </head>
 
 <body>
@@ -37,7 +40,9 @@
 	<div class="l-main">
 		<div class="l-container">
 			<div class="p-signup-verify-main">
-				<form action="${pageContext.request.contextPath}/user/normalJoinFirstOk.usr" method="post">
+				<form
+					action="${pageContext.request.contextPath}/user/normalJoinFirstOk.usr"
+					method="post">
 					<div class="l-signup-verify-layout">
 						<div>
 							<h2>회원가입</h2>
@@ -57,44 +62,30 @@
 						</div>
 						<div class="c-signup-verify-input">
 							<h6>생년월일</h6>
-							<input type="date" name="userBirth" id="user-birth" class="c-input"
-								placeholder="생년월일을 입력해주세요" />
+							<input type="date" name="userBirth" id="user-birth"
+								class="c-input" placeholder="생년월일을 입력해주세요" />
 							<p id="is-user-birth-error" class="is-error-text"></p>
 						</div>
-						
+
 						<div class="c-signup-verify-input">
 							<h6>이메일</h6>
 							<div class="l-signup-verify-layout-btn">
-								<input type="text" name="userEmail" id="user-email" class="c-input"
-									placeholder="이메일을 입력해주세요" />
+								<input type="text" name="userEmail" id="user-email"
+									class="c-input" placeholder="이메일을 입력해주세요" />
 								<div class="c-signup-btn">
-									<button class="c-button c-button--secondary c-button--md"
-										type="button">인증 보내기</button>
+									<button type="button"
+										class="c-button c-button--secondary c-button--md"
+										id="email-check-btn">중복확인</button>
 								</div>
 							</div>
 							<p id="is-user-email-error" class="is-error-text"></p>
 						</div>
-										
-						<div class="c-signup-verify-input-number">
-							<h6>인증번호</h6>
-							<div class="l-signup-verify-number-layout">
-								<div>
-									<input type="text" name="" id="" class="c-input"
-										placeholder="인증번호입력" />
-									<div class="c-signup-verify-numbertime">3:00</div>
-								</div>
-								<div class="c-signup-btn">
-									<button class="c-button c-button--secondary c-button--md"
-										type="button">인증확인</button>
-								</div>
-							</div>
-						</div>				
-											
+
 						<div class="c-signup-verify-input">
 							<h6>휴대전화</h6>
 							<div class="l-signup-verify-layout-btn">
-								<input type="text" name="userPhoneNum" id="user-phone" class="c-input"
-									placeholder="휴대전화번호 입력" />
+								<input type="text" name="userPhoneNum" id="user-phone"
+									class="c-input" placeholder="휴대전화번호 입력" />
 								<div class="c-signup-btn">
 									<button class="c-button c-button--secondary c-button--md"
 										type="button">인증 보내기</button>
