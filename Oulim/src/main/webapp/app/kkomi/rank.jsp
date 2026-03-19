@@ -11,16 +11,31 @@
   <title>rank</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/reset.css" />
   <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/variable.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/typography.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/Typography.css" />
   <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/layout.css" />
   <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/badge.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/button.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/kkomi/rank.css">
   <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/asset/css/pages/main/header-login.css" />
   <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
   <script defer src="${pageContext.request.contextPath}/asset/js/pages/kkomi/rank.js"></script>
-  
+  <script>
+	const contextPath = "${pageContext.request.contextPath}";
+	const rankData = [
+		<c:forEach var="rank" items="${rankingList}" varStatus="status">
+		{
+			userNo : ${rank.userNo},
+			name : "${rank.userNickname}",
+			score: ${rank.rankPoint},
+			level : ${rank.kkomiLev},
+			ranking : ${rank.ranking}
+		}<c:if test="${!status.last}">,</c:if>
+		</c:forEach>
+	];
+	const loginUserNo = ${sessionScope.userNo};
+  </script>
 
 </head>
 
@@ -38,7 +53,7 @@
 
         <ul class="c-rank-list js-rank-list">
         </ul>
-        <button class="c-button c-button--secondary c-button--md" onclick="location.href='Kkomi-training-center.html'">
+        <button class="c-button c-button--secondary c-button--md" onclick="location.href=${pageContext.request.contextPath}/kkomi/info.kko">
           수련소로 돌아가기
         </button>
       </section>

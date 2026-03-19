@@ -52,7 +52,7 @@
 						<h3 class="c-growth-card__title">
 							현재 순위 <span class="js-rank"></span>위
 						</h3>
-						<button class="c-button c-button--primary c-button--sm">
+						<button id="rankingBtn" class="c-button c-button--primary c-button--sm">
 							순위 보러가기</button>
 					</div>
 					<!-- 레벨 -->

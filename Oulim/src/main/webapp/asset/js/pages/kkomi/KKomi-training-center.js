@@ -48,6 +48,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const feedBtn = document.querySelector("#feedBtn");
   const missionBtn = document.querySelector(".js-mission");
   const storageBtn = document.querySelector(".js-storage");
+  const rankingBtn = document.getElementById("rankingBtn");
+  
+  rankingBtn.addEventListener("click" ,() => {
+	location.href =`${contextPath}/kkomi/ranking.kko`;
+  });
 
   feedBtn?.addEventListener("click", async () => {    
 		if (!isLogin) {

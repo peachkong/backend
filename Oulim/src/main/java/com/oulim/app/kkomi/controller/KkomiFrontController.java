@@ -51,7 +51,12 @@ public class KkomiFrontController extends HttpServlet {
 		case "/kkomi/feed.kko" ->{
 			System.out.println("꼬미 도력 쌓기");
 			result = new KkomiUpdateController().execute(request, response);
-			System.out.println();
+			System.out.println("꼬미 도력 쌓기 완료");			
+		}
+		case "/kkomi/ranking.kko" ->{
+			System.out.println("랭킹 페이지 진입");
+			result = new RankingListController().execute(request, response);
+			System.out.println("랭킹 페이지 진입 완료");
 		}
 		}
 		

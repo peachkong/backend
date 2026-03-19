@@ -35,6 +35,12 @@ public class KkomiInfoController implements Execute {
 		
 		
 		kkomiJoinDTO = kkomiDAO.getKkomiInfo(userNo);
+		if(kkomiJoinDTO == null) {
+			result.setPath(request.getContextPath() + "/user/login.usr");
+			result.setRedirect(true);
+			return result;
+		}
+		
 		if(kkomiJoinDTO.getMyRanking() == 0) {
 			int totalUserCount = new UserDAO().getTotalUser(DefineType.NORMAL_USER_TYPE);
 			System.out.println("총 유저수 : " + totalUserCount);

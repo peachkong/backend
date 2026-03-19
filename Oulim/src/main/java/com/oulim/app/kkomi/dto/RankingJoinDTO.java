@@ -38,7 +38,9 @@ public class RankingJoinDTO {
 	}
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
-	}	
+		return "RankingJoinDTO [userNo=" + userNo + ", rankPoint=" + rankPoint + ", ranking=" + ranking
+				+ ", userNickname=" + userNickname + ", kkomiLev=" + kkomiLev + "]";
+	}
+
+	
 }
