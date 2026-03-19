@@ -80,7 +80,22 @@
 							</div>
 							<p id="is-user-email-error" class="is-error-text"></p>
 						</div>
-
+						
+						<div class="c-signup-verify-input-number">
+							<h6>인증번호</h6>
+							<div class="l-signup-verify-number-layout">
+								<div>
+									<input type="text" name="" id="" class="c-input"
+										placeholder="인증번호입력" />
+									<div class="c-signup-verify-numbertime">3:00</div>
+								</div>
+								<div class="c-signup-btn">
+									<button class="c-button c-button--secondary c-button--md"
+										type="button">인증확인</button>
+								</div>
+							</div>
+						</div>
+						
 						<div class="c-signup-verify-input">
 							<h6>휴대전화</h6>
 							<div class="l-signup-verify-layout-btn">

@@ -42,7 +42,8 @@
 				<form
 					action="${pageContext.request.contextPath}/user/organJoinFirstOk.usr"
 					method="post" enctype="multipart/form-data">
-
+					<input type="hidden" name="emailVerified"
+						id="company-email-verified" value="false" />
 					<div class="l-signup-verify-company-layout">
 						<div>
 							<h2>회원가입</h2>
@@ -90,9 +91,26 @@
 								<div class="c-signup-company-btn">
 									<button type="button"
 										class="c-button c-button--secondary c-button--md"
-										id="company-email-check-btn">중복확인</button>
+										id="company-email-check-btn">인증발송</button>
 								</div>
 							</div>
+						</div>
+						<div class="c-signup-verify-input-number">
+							<h6>이메일 인증번호</h6>
+							<div class="l-signup-verify-number-layout">
+								<div>
+									<input type="text" name="emailAuthCode"
+										id="company-email-auth-code" class="c-input"
+										placeholder="인증번호입력" />
+									<div class="c-signup-verify-numbertime"
+										id="company-email-timer">3:00</div>
+								</div>
+								<div class="c-signup-btn">
+									<button class="c-button c-button--secondary c-button--md"
+										type="button" id="company-email-auth-confirm-btn">인증확인</button>
+								</div>
+							</div>
+							<p id="is-company-email-auth-error" class="is-error-text"></p>
 						</div>
 						<div class="c-signup-verify-company-input-file">
 							<h6>파일 첨부 (재직증명서 사본과 사업자등록증 사본을 하나의 pdf로 올려주세요)</h6>

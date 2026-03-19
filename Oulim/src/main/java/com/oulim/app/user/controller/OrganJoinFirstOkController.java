@@ -18,8 +18,14 @@ public class OrganJoinFirstOkController implements Execute{
 	@Override
 	public Result execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+			
 		Result result = new Result();
+		
+		Boolean emailVerified = (Boolean) request.getSession().getAttribute("emailVerified");
+
+		if (emailVerified == null || !emailVerified) {
+			throw new ServletException("이메일 인증이 완료되지 않았습니다.");
+		}
 		
 		final String UPLOAD_PATH = request.getSession().getServletContext().getRealPath("/") + "upload/";
 		final int FILE_SIZE = 1024 * 1024 * 5;

@@ -82,8 +82,12 @@ public class UserFrontController extends HttpServlet {
 		    
 		} else if (target.equals("/user/checkOk.usr")) {
 			System.out.println("데이터 중복체크 요청");
-		    result = new CheckOkController().execute(request, response);
-		} 
+		    execute = new CheckOkController();
+		} else if(target.equals("/user/sendEmailAuthCode.usr")) {
+			execute = new SendEmailAuthCodeController();
+		} else if(target.equals("/user/verifyEmailAuthCode.usr")) {
+			execute = new VerifyEmailAuthCodeController();
+		}
 		
 		if (execute != null) {
 			result = execute.execute(request, response);
