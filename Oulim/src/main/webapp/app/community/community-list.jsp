@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/pagination.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/input.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/button.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/list.css" />
+    <%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/list.css" /> --%>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/card.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/DetailCard.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/badge.css" />
@@ -82,8 +82,8 @@
           <div class="c-list c-list--5col">
             <!-- header -->
             <div class="c-list__header">
-              <span class="c-list__col">제목</span>
               <span class="c-list__col">번호</span>
+              <span class="c-list__col">제목</span>
               <span class="c-list__col">닉네임</span>
               <span class="c-list__col">작성일</span>
               <span class="c-list__col">추천수</span>
@@ -95,11 +95,12 @@
             			<c:forEach var="post" items="${postList}">
 							<a href="${pageContext.request.contextPath}/community/detail.commu?postNo=${post.postNo}">
 									<div class="c-list__row">
+											 <span class="c-list__col"> <c:out
+													value="${post.getPostNo()}" />
+											</span> 
 											<span class="c-list__col"> <c:out
 													value="${post.getPostTitle()}" />
-											</span> <span class="c-list__col"> <c:out
-													value="${post.getPostNo()}" />
-											</span> <span class="c-list__col"> <c:out
+											</span><span class="c-list__col"> <c:out
 													value="${post.getUserNickname()}" />
 											</span> <span class="c-list__col"> <c:out
 													value="${post.getPostDate()}" />
