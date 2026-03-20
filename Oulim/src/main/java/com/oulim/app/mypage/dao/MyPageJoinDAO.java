@@ -70,8 +70,12 @@ public class MyPageJoinDAO {
 	
 //	4. 예정된 봉사 목록 조회
 	
-	public List<MyPageJoinDTO> comingVolun(int userNo) {
-		return sqlSession.selectList("mypage.comingVol", userNo);
+	public List<MyPageJoinDTO> comingVolunPage(Map<String, Object> map) {
+	    return sqlSession.selectList("mypage.comingVolunPage", map);
+	}
+
+	public int comingVolunTotal(int userNo) {
+	    return sqlSession.selectOne("mypage.comingVolunTotal", userNo);
 	}
 	
 //	5. 완료된 봉사 목록 조회
