@@ -14,60 +14,66 @@ import com.oulim.app.volunteer.dto.VolunActivityDTO;
 
 public class VolunActListController implements Execute {
 
+	private int parseIntSafe(String param) {
+		if (param == null || param.trim().equals("") || param.trim().equals("0")) {
+			return 0;
+		}
+		return Integer.parseInt(param.trim());
+	}
+
 	@Override
 	public Result execute(HttpServletRequest request, HttpServletResponse response)
-	        throws ServletException, IOException {
+			throws ServletException, IOException {
 
-	    VolunteerActivityDAO dao = new VolunteerActivityDAO();
-	    VolunActivityDTO dto = new VolunActivityDTO();
+		VolunteerActivityDAO dao = new VolunteerActivityDAO();
+		VolunActivityDTO dto = new VolunActivityDTO();
 
-	    // ===================== 파라미터 =====================
-	    String actType = request.getParameter("actType");
-	    String ageGroup = request.getParameter("ageGroup");
-	    String recruitStatus = request.getParameter("recruitStatus");
-	    String keyword = request.getParameter("keyword");
-	    String searchType = request.getParameter("searchType");
-	    String organization = request.getParameter("organization");
+		String actType = request.getParameter("volunActActType");
+		String ageGroup = request.getParameter("volunActAgeGroup");
+		String recruitStatus = request.getParameter("recruitStatus");
+		String keyword = request.getParameter("keyword");
+		String searchType = request.getParameter("searchType");
+		String organization = request.getParameter("organization");
 
-	    dto.setVolunActActType(actType == null || actType.equals("0") ? 0 : Integer.parseInt(actType));
-	    dto.setVolunActAgeGroup(ageGroup == null || ageGroup.equals("0") ? 0 : Integer.parseInt(ageGroup));
-	    dto.setRecruitStatus(recruitStatus == null ? "0" : recruitStatus);
-	    dto.setKeyword(keyword);
-	    dto.setSearchType(searchType);
-	    dto.setOrganization(organization);
+		dto.setVolunActActType(parseIntSafe(actType));
+		dto.setVolunActAgeGroup(parseIntSafe(ageGroup));
+		dto.setRecruitStatus(recruitStatus == null ? "0" : recruitStatus.trim());
+		dto.setKeyword(keyword == null ? "" : keyword.trim());
+		dto.setSearchType(searchType == null ? "title" : searchType.trim());
+		dto.setOrganization(organization == null ? "" : organization.trim());
 
-	    // ===================== 페이징 =====================
-	    int page = request.getParameter("page") == null ? 1 : Integer.parseInt(request.getParameter("page"));
-	    int size = 10;
+		int page = parseIntSafe(request.getParameter("page"));
+		if (page == 0)
+			page = 1;
 
-	    int totalCount = dao.selectCount(dto);
-	    int totalPage = (int) Math.ceil((double) totalCount / size);
+		int size = 10;
 
-	    int pageBlock = 5;
-	    int startPage = ((page - 1) / pageBlock) * pageBlock + 1;
-	    int endPage = Math.min(startPage + pageBlock - 1, totalPage);
+		int totalCount = dao.selectCount(dto);
+		int totalPage = (int) Math.ceil((double) totalCount / size);
 
-	    int startRow = (page - 1) * size;
-	    int endRow = page * size;
+		int pageBlock = 5;
+		int startPage = ((page - 1) / pageBlock) * pageBlock + 1;
+		int endPage = Math.min(startPage + pageBlock - 1, totalPage);
 
-	    dto.setStartRow(startRow);
-	    dto.setEndRow(endRow);
+		int startRow = (page - 1) * size;
+		int endRow = page * size;
 
-	    // ===================== 조회 =====================
-	    List<VolunActivityDTO> list = dao.selectVolActList(dto);
+		dto.setStartRow(startRow);
+		dto.setEndRow(endRow);
 
-	    // ===================== 전달 =====================
-	    request.setAttribute("volunteerList", list);
-	    request.setAttribute("search", dto);
-	    request.setAttribute("page", page);
-	    request.setAttribute("startPage", startPage);
-	    request.setAttribute("endPage", endPage);
-	    request.setAttribute("totalPage", totalPage);
+		List<VolunActivityDTO> list = dao.selectVolActList(dto);
 
-	    Result result = new Result();
-	    result.setPath("/app/volunteer-activity/volunAct-list.jsp");
-	    result.setRedirect(false);
+		request.setAttribute("volunteerList", list);
+		request.setAttribute("search", dto);
+		request.setAttribute("page", page);
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("totalPage", totalPage);
 
-	    return result;
+		Result result = new Result();
+		result.setPath("/app/volunteer-activity/volunAct-list.jsp");
+		result.setRedirect(false);
+
+		return result;
 	}
 }
