@@ -44,38 +44,15 @@
 								<h3>회원가입이 완료 되었습니다.</h3>
 							</div>
 							<div>
-								<h6>확인버튼 선택 시 메인 화면으로 이동합니다.</h6>
+								<h6>로그인 버튼 선택시 로그인 화면으로 이동합니다.</h6>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="l-siginup-complete-textarea-layout">
-					<div class="c-siginup-complete-text-left">
-						<div>
-							<p>이름</p>
-						</div>
-						<div>
-							<p>아이디</p>
-						</div>
-						<div>
-							<p>이메일</p>
-						</div>
-					</div>
-					<div class="c-siginup-complete-text-right">
-						<div>
-							<p>${sessionScope.userName}</p>
-						</div>
-						<div>
-							<p>${sessionScope.userId}</p>
-						</div>
-						<div>
-							<p>${sessionScope.userEmail}</p>
-						</div>
-					</div>
-				</div>
+				
 				<div class="c-signup-complete">
-					<button type="button" class="c-button c-button--primary c-button--md">
-						다음</button>
+					<button type="submit" class="c-button c-button--primary c-button--md">
+						로그인</button>
 				</div>
 			</form>
 		</div>
