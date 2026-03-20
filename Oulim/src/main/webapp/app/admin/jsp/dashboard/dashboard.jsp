@@ -43,16 +43,16 @@
       <nav class="sidebar-menu">
         <ul>
           <li class="menu-item">
-            <a href="${pageContext.request.contextPath}/app/admin/jsp/dashboard/dashboard.jsp">통계</a>
+            <a href="${pageContext.request.contextPath}app/admin/jsp/dashboard/dashboard.jsp">통계</a>
           </li>
-
+<%-- <form action="${pageContext.request.contextPath}/admin/loginOk.adm" method="POST"> --%>
           <!-- 회원관리 -->
           <li class="menu-item dropdown">
             <a href="#" class="menu-title"> 회원관리 </a>
 
             <ul class="submenu">
               <li><a href="${pageContext.request.contextPath}/app/admin/jsp/member-manage/company-certification.jsp">기업회원</a></li>
-              <li><a href="${pageContext.request.contextPath}/app/admin/jsp/member-manage/mem-list.jsp">회원조회</a></li>
+              <li><a href="${pageContext.request.contextPath}/admin/memlist.adm" method="POST">회원조회</a></li>
             </ul>
           </li>
 
@@ -90,7 +90,7 @@
             <p>가입 기업: 30</p>
           </div>
           <div id="content-area">
-            <p>신규 신청 기업회원 : 3000</p>
+            <p>미처리 기업회원 : 3000</p>
           </div>
           <div id="content-area">
             <p>총 단체 회원수 : 3000</p>

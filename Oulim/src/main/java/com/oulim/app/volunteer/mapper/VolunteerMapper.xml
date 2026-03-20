@@ -5,7 +5,7 @@
 <select id="selectVolunteerList"
         parameterType="VolunActivityDTO"
         resultType="VolunActivityDTO">
-	
+	<![CDATA[
 	SELECT
 	    Volun_Act_No, <!-- 봉사번호 -->
 	    Volun_Act_Title, <!-- 봉사제목 -->
@@ -18,7 +18,7 @@
 	    Volun_Act_Age_Group, <!-- 참여가능연령 -->
 	    Volun_Act_Address, <!--봉사주소s-->
 	
-	    <![CDATA[
+	    
 	    CASE
 	        WHEN SYSDATE < Volun_Act_Recru_Begin THEN '모집예정'
 	        WHEN SYSDATE BETWEEN Volun_Act_Recru_Begin AND Volun_Act_Recru_End THEN '모집중'

@@ -49,7 +49,6 @@
 		
 		<!-- Admin DTO -->
 		<typeAlias type="com.oulim.app.admin.dto.AdminDTO" alias="AdminDTO"></typeAlias>
-		<typeAlias type="com.oulim.app.admin.dto.AdminSearchDTO" alias="AdminSearchDTO"></typeAlias>
 	</typeAliases>
 
 	<environments default="oracle">

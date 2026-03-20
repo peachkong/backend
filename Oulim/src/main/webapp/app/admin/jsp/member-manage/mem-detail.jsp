@@ -110,12 +110,6 @@
         <!-- 회원번호 + 상세 폼 묶음 -->
         <div class="detail-body">
 
-          <!-- 좌측 회원번호 박스 -->
-          <div class="member-no-box">
-            1
-            
-          </div>
-
           <!-- 우측 상세 입력/표시 영역 -->
           <form class="detail-form">
 

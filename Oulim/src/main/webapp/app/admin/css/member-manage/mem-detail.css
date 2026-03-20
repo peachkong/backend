@@ -156,22 +156,6 @@ aside {
 }
 
 /* ===================================== */
-/* 좌측 회원번호 빨간 박스 */
-/* ===================================== */
-.member-no-box {
-  width: 48px;
-  height: 48px;
-  background-color: red;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  flex-shrink: 0;
-  margin-top: 28px;
-}
-
-/* ===================================== */
 /* 오른쪽 상세 폼 전체 */
 /* ===================================== */
 .detail-form {

@@ -80,6 +80,33 @@ public class AdminFrontController extends HttpServlet {
 		    result = new AdminDashboardController().execute(request, response);
 		    break;	
 		
+		case "/admin/memlist.adm":
+			System.out.println("회원 목록 요청");
+			result = new AdminMemListController().execute(request, response);
+			break;	
+
+		case "/admin/memdetail.adm":
+			System.out.println("회원 목록 요청");
+			result = new AdminMemDetailController().execute(request, response);
+			break;	
+		
+		case "/admin/memedit.adm":
+			System.out.println("회원 목록 요청");
+			result = new AdminMemEditController().execute(request, response);
+			break;	
+			
+		case "/admin/volunlist.adm":
+			System.out.println("봉사 목록 요청");
+			result = new AdminVolunListController().execute(request, response);
+			break;	
+			
+		case "/admin/postlist.adm":
+			System.out.println("게시판 목록 요청");
+			result = new AdminPostListController().execute(request, response);
+			break;	
+			
+			
+			
 		}
 
 		if (result != null) {
