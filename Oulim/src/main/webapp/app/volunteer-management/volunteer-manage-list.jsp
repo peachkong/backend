@@ -30,12 +30,11 @@
 
 
 <script defer src="${pageContext.request.contextPath}/asset/js/pages/main/include.js"></script>
-<script
-	src="${pageContext.request.contextPath}/asset/js/pages/volunteer-manage/volunteer-manage-list.js"
-	defer></script>
+<script defer src="${pageContext.request.contextPath}/asset/js/pages/volunteer-manage/volunteer-manage-list.js"></script>
+<script defer src="${pageContext.request.contextPath}/asset/js/pages/volunteer-manage/volunteer-manage-error-message.js"></script>
 </head>
 
-<body>
+<body data-message="${param.message}">
 	<jsp:include page="/app/include/header.jsp" />
 
 	<main class="l-main">
@@ -89,11 +88,13 @@
 						onclick="location.href='${pageContext.request.contextPath}/volunteer-manage/register.vm'">봉사
 							등록</button>
 					</div>
+					<div class="roll">※ 상태 정렬 순서 모집중 모집예정 모집마감 ※ 모집중 마감이 가장 가까운 순 | 모집예정 시작일 가까운 순 | 모집마감 최근 마감된 순 </div>
 				<div class="p-volunteer-manage-list_content">
-					<div class="c-list c-list--4col">
+					<div class="c-list c-list--5col">
 						<!-- header -->
 						<div class="c-list__header">
-							<span class="c-list__col">제목</span> <span class="c-list__col">기간</span> <span class="c-list__col">활동 분야</span>
+							<span class="c-list__col">제목</span> <span class="c-list__col">모집 기간</span> <span class="c-list__col">봉사 기간</span>  
+							<span class="c-list__col">활동 분야</span>
 							<span class="c-list__col">상태</span> 
 						</div>
 						<!-- body -->
@@ -110,6 +111,11 @@
 											<span class="c-list__col">
 											<a href="${pageContext.request.contextPath}/volunteer-manage/detail.vm?volunActNo=${volunteer.volunActNo}">
 												${volunteer.volunActRecruBegin} ~ ${volunteer.volunActRecruEnd}
+											</a>
+											</span>
+											<span class="c-list__col">
+											<a href="${pageContext.request.contextPath}/volunteer-manage/detail.vm?volunActNo=${volunteer.volunActNo}">
+												${volunteer.volunActProcBegin} ~ ${volunteer.volunActProcEnd}
 											</a>
 											</span>
 											<span class="c-list__col">

@@ -83,16 +83,31 @@
 }
 
 .l-volunAct-list-search-submit .c-button {
-	width: 50%;
+	width: 80%;
 	height: 50px;
 	font-size: 28px;
 }
 
-.c-list--4col .c-list__header, .c-list--4col .c-list__row {
-	grid-template-columns: 1fr 1fr 1fr 1fr !important;
+.c-list--5col .c-list__header, .c-list--5col .c-list__row {
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr !important;
+} 
+.c-list__row:hover .c-list__col {
+	color: #2f80ed !important;
 }
 
 .c-list__header span, .c-list__row span{
 	text-align:center !important;
 	justify-content:center !important;
+}
+
+.c-input{
+	border-radius: 8px !important;
+}
+
+.l-volunAct-list-search-keyword input:last-child{
+	width: 73.5% !important;
+}
+
+.roll{
+	margin-bottom: 10px;
 }

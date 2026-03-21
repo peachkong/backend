@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oulim.app.common.controller.Execute;
 import com.oulim.app.common.controller.Result;
@@ -18,13 +19,17 @@ public class VolunManageUpdateController implements Execute {
 			throws ServletException, IOException {
 		VolunteerMangementDAO volunteerMangementDAO = new VolunteerMangementDAO();
 		Result result = new Result();
+		HttpSession session = request.getSession();
 		
 		int volunActNo = Integer.parseInt(request.getParameter("volunActNo"));
-
+		String organName = (String) session.getAttribute("organName");
+		
 		VolunActivityDTO volunActivityDTO = volunteerMangementDAO.selectVolManageUpdate(volunActNo);
 		
 		request.setAttribute("volunActivity", volunActivityDTO);
+		request.setAttribute("organName", organName);
 		
+		System.out.println(volunActivityDTO);
 		result.setPath("/app/volunteer-management/volunteer-manage-edit.jsp");
 		result.setRedirect(false);
 

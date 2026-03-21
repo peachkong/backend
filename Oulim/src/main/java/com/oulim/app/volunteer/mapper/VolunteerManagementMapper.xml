@@ -290,6 +290,8 @@
 					VOLUN_ACT_ACT_TYPE,
 					TO_CHAR(VOLUN_ACT_RECRU_BEGIN, 'YYYY-MM-DD') AS VOLUN_ACT_RECRU_BEGIN,
 					TO_CHAR(VOLUN_ACT_RECRU_END, 'YYYY-MM-DD') AS VOLUN_ACT_RECRU_END,
+					TO_CHAR(Volun_Act_Proc_Begin, 'YYYY-MM-DD') AS Volun_Act_Proc_Begin,
+					TO_CHAR(Volun_Act_Proc_End, 'YYYY-MM-DD') AS Volun_Act_Proc_End,
 					CASE
 						WHEN SYSDATE < VOLUN_ACT_RECRU_BEGIN THEN '모집예정'
 						WHEN SYSDATE < VOLUN_ACT_RECRU_END + 1 THEN '모집중'
@@ -316,7 +318,23 @@
 		</if>
 	
 		<![CDATA[
-				ORDER BY VOLUN_ACT_RECRU_END DESC
+				ORDER BY
+	            CASE
+	                WHEN TRUNC(SYSDATE) < VOLUN_ACT_RECRU_BEGIN THEN 2
+	                WHEN TRUNC(SYSDATE) <= VOLUN_ACT_RECRU_END THEN 1
+	                ELSE 3
+	            END,
+	            CASE
+	                WHEN TRUNC(SYSDATE) >= VOLUN_ACT_RECRU_BEGIN
+	                     AND TRUNC(SYSDATE) <= VOLUN_ACT_RECRU_END
+	                THEN VOLUN_ACT_RECRU_END
+	                WHEN TRUNC(SYSDATE) < VOLUN_ACT_RECRU_BEGIN
+	                THEN VOLUN_ACT_RECRU_BEGIN
+	            END ASC,
+	            CASE
+	                WHEN TRUNC(SYSDATE) > VOLUN_ACT_RECRU_END
+	                THEN VOLUN_ACT_RECRU_END
+	            END DESC
 			) T
 			WHERE ROWNUM <= #{endRow}
 		)

@@ -25,12 +25,14 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/main/header-login.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
-<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=d090ba1051e43d12c75b06b4254865bf&autoload=false&libraries=services"></script>
+<script defer src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=d090ba1051e43d12c75b06b4254865bf&autoload=false&libraries=services"></script>
 <script defer src="${pageContext.request.contextPath}/asset/js/pages/volunteer-manage/volunteer-manage-detail.js"></script>
+<script defer src="${pageContext.request.contextPath}/asset/js/pages/volunteer-manage/volunteer-manage-error-message.js"></script>
 </head>
 
-<body>
+<body data-message="${param.message}">
 	<jsp:include page="/app/include/header.jsp" />
+
 	<input type="hidden" name="volunActNo" value="${volunDetail.volunActNo}"> 
 	<input type="hidden" name="volunActAgeGroup" value="${volunDetail.volunActAgeGroup}"> 
 	<main class="l-main">

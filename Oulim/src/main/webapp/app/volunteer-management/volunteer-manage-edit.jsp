@@ -15,10 +15,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/Typography.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/core/layout.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/volunteer-manage/volunteer-manage-edit.css" />
-    <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/asset/css/pages/main/header-login.css" />
-	<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/main/header-login.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
 
     <!-- 컨포넌트 css 선택-->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/input.css" />
@@ -28,10 +26,11 @@
 
     <script defer src="${pageContext.request.contextPath}/asset/js/pages/main/include.js"></script>
     <script defer src="${pageContext.request.contextPath}/asset/js/pages/volunteer-manage/volunteer-manage-edit.js"></script>
+    <script defer src="${pageContext.request.contextPath}/asset/js/pages/volunteer-manage/volunteer-manage-error-message.js"></script>
     <script src="//t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 
-<body>
+<body data-message="${param.message}">
 	<jsp:include page="/app/include/header.jsp" />
 
 	<main class="l-main">
@@ -112,12 +111,12 @@
 							<div class="l-volunteer-manage-edit_form-field">
 								<select id="volunActActType" name="volunActActType" class="c-select">
 									<option value="">선택</option>
-									<option value="1" <c:if test="${volunteer.volunActActType == 1}">selected</c:if>>환경</option>
-									<option value="2" <c:if test="${volunteer.volunActActType == 2}">selected</c:if>>의료</option>
-									<option value="3" <c:if test="${volunteer.volunActActType == 3}">selected</c:if>>교육</option>
-									<option value="4" <c:if test="${volunteer.volunActActType == 4}">selected</c:if>>생활·편의</option>
-									<option value="5" <c:if test="${volunteer.volunActActType == 5}">selected</c:if>>문화·체육·예술</option>
-									<option value="6" <c:if test="${volunteer.volunActActType == 6}">selected</c:if>>기타</option>
+									<option value="1" <c:if test="${volunActivity.volunActActType == 1}">selected</c:if>>환경</option>
+									<option value="2" <c:if test="${volunActivity.volunActActType == 2}">selected</c:if>>의료</option>
+									<option value="3" <c:if test="${volunActivity.volunActActType == 3}">selected</c:if>>교육</option>
+									<option value="4" <c:if test="${volunActivity.volunActActType == 4}">selected</c:if>>생활·편의</option>
+									<option value="5" <c:if test="${volunActivity.volunActActType == 5}">selected</c:if>>문화·체육·예술</option>
+									<option value="6" <c:if test="${volunActivity.volunActActType == 6}">selected</c:if>>기타</option>
 								</select>
 							</div>
 						</div>
@@ -126,7 +125,7 @@
 							<label class="l-volunteer-manage-edit_form-label">모집기관</label>
 							<div class="l-volunteer-manage-edit_form-field">
 								<input type="text" id="OrganizationName" name="OrganizationName" class="c-input"
-									value="${volunActivity.volunActNo}" placeholder="등록된 기관명 노출 예정" readonly />
+									value="${organName}" placeholder="등록된 기관명 노출 예정" readonly />
 							</div>
 						</div>
 

@@ -23,10 +23,11 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/select.css" />
 <script defer src="${pageContext.request.contextPath}/asset/js/pages/main/include.js"></script>
 <script defer src="${pageContext.request.contextPath}/asset/js/pages/volunteer-manage/volunteer-manage-register.js"></script>
-<script src="//t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script defer src="//t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script defer src="${pageContext.request.contextPath}/asset/js/pages/volunteer-manage/volunteer-manage-error-message.js"></script>
 </head>
 
-<body>
+<body data-message="${param.message}">
 <jsp:include page="/app/include/header.jsp" />
 
 <main class="l-main">

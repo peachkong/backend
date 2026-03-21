@@ -14,69 +14,57 @@ import com.oulim.app.volunteer.management.service.VolunManageInsertService;
 
 public class VolunManageInsertOkController implements Execute {
 
-	@Override
-	public Result execute(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+    @Override
+    public Result execute(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-		Result result = new Result();
-		HttpSession session = request.getSession();
+        Result result = new Result();
+        HttpSession session = request.getSession();
 
-		Integer organNo = (Integer) session.getAttribute("organNo");
-		String organName = (String) session.getAttribute("organName");
-		VolunActivityDTO volunActivityDTO = new VolunActivityDTO();
+        Integer organNo = (Integer) session.getAttribute("organNo");
+        String organName = (String) session.getAttribute("organName");
+        VolunActivityDTO volunActivityDTO = new VolunActivityDTO();
 
-		volunActivityDTO.setVolunActTitle(request.getParameter("volunActTitle"));
-		volunActivityDTO.setVolunActRecruBegin(request.getParameter("volunActRecruBegin"));
-		volunActivityDTO.setVolunActRecruEnd(request.getParameter("volunActRecruEnd"));
-		volunActivityDTO.setVolunActProcBegin(request.getParameter("volunActProcBegin"));
-		volunActivityDTO.setVolunActProcEnd(request.getParameter("volunActProcEnd"));
-		volunActivityDTO.setVolunActAddress(request.getParameter("volunActAddress"));
-		volunActivityDTO.setVolunActAddressDetail(request.getParameter("volunActAddressDetail"));
-		volunActivityDTO.setVolunActDetail(request.getParameter("volunActDetail"));
-		volunActivityDTO.setVolunActPostnum(request.getParameter("volunActPostnum"));
-		volunActivityDTO.setVolunActOrganNo(organNo);
-		volunActivityDTO.setVolunActOrginName(organName);
-		String point = request.getParameter("volunActPoint");
-		String beginTime = request.getParameter("volunActBeginTime");
-		String endTime = request.getParameter("volunActEndTime");
-		String actType = request.getParameter("volunActActType");
-		String ageGroup = request.getParameter("volunActAgeGroup");
-		String maxCount = request.getParameter("volunActRecruMaxCount");
-		
-		System.out.println(volunActivityDTO);
-		try {
-			volunActivityDTO.setVolunActPoint(Integer.parseInt(point));
-			volunActivityDTO.setVolunActBeginTime(Integer.parseInt(beginTime));
-			volunActivityDTO.setVolunActEndTime(Integer.parseInt(endTime));
-			volunActivityDTO.setVolunActActType(Integer.parseInt(actType));
-			volunActivityDTO.setVolunActAgeGroup(Integer.parseInt(ageGroup));
-			volunActivityDTO.setVolunActRecruMaxCount(Integer.parseInt(maxCount));
-		} catch (NumberFormatException | NullPointerException e) {
-			request.setAttribute("errorMessage", "숫자 또는 선택 항목을 다시 확인해주세요.");
-			request.setAttribute("volunteer", volunActivityDTO);
-			result.setRedirect(false);
-			result.setPath("/app/volunteer-manage/volunteer-manage-register.jsp");
-			return result;
-		}
+        volunActivityDTO.setVolunActTitle(request.getParameter("volunActTitle"));
+        volunActivityDTO.setVolunActRecruBegin(request.getParameter("volunActRecruBegin"));
+        volunActivityDTO.setVolunActRecruEnd(request.getParameter("volunActRecruEnd"));
+        volunActivityDTO.setVolunActProcBegin(request.getParameter("volunActProcBegin"));
+        volunActivityDTO.setVolunActProcEnd(request.getParameter("volunActProcEnd"));
+        volunActivityDTO.setVolunActAddress(request.getParameter("volunActAddress"));
+        volunActivityDTO.setVolunActAddressDetail(request.getParameter("volunActAddressDetail"));
+        volunActivityDTO.setVolunActDetail(request.getParameter("volunActDetail"));
+        volunActivityDTO.setVolunActPostnum(request.getParameter("volunActPostnum"));
+        volunActivityDTO.setVolunActOrganNo(organNo);
+        volunActivityDTO.setVolunActOrginName(organName);
 
-		try {
-			VolunManageInsertService service = new VolunManageInsertService();
-			service.insertVolunteer(volunActivityDTO);
+        try {
+            volunActivityDTO.setVolunActPoint(parseRequiredInt(request.getParameter("volunActPoint")));
+            volunActivityDTO.setVolunActBeginTime(parseRequiredInt(request.getParameter("volunActBeginTime")));
+            volunActivityDTO.setVolunActEndTime(parseRequiredInt(request.getParameter("volunActEndTime")));
+            volunActivityDTO.setVolunActActType(parseRequiredInt(request.getParameter("volunActActType")));
+            volunActivityDTO.setVolunActAgeGroup(parseRequiredInt(request.getParameter("volunActAgeGroup")));
+            volunActivityDTO.setVolunActRecruMaxCount(parseRequiredInt(request.getParameter("volunActRecruMaxCount")));
 
-			result.setRedirect(true);
-			result.setPath(request.getContextPath() + "/volunteer-manage/list.vm");
-		} catch (IllegalArgumentException e) {
-			request.setAttribute("errorMessage", e.getMessage());
-			request.setAttribute("volunteer", volunActivityDTO);
-			result.setRedirect(false);
-			result.setPath("/app/volunteer-manage/volunteer-manage-register.jsp");
-		} catch (Exception e) {
-			request.setAttribute("errorMessage", "등록 중 오류가 발생했습니다.");
-			request.setAttribute("volunteer", volunActivityDTO);
-			result.setRedirect(false);
-			result.setPath("/app/volunteer-manage/volunteer-manage-register.jsp");
-		}
+            VolunManageInsertService service = new VolunManageInsertService();
+            service.insertVolunteer(volunActivityDTO);
 
-		return result;
-	}
+            result.setRedirect(true);
+            result.setPath(request.getContextPath() + "/volunteer-manage/list.vm?message=insertSuccess");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            result.setRedirect(true);
+            result.setPath(request.getContextPath() + "/volunteer-manage/register.vm?message=insertFail");
+        }
+
+        return result;
+    }
+
+    private int parseRequiredInt(String value) {
+        if (value == null || value.trim().isEmpty()) {
+            throw new IllegalArgumentException("필수 숫자값이 비어 있습니다.");
+        }
+        return Integer.parseInt(value.trim());
+    }
 }

@@ -4,8 +4,9 @@ document.addEventListener("DOMContentLoaded", function () {
 	const attendanceSection = document.getElementById("attendanceSection");
 	const viewInput = document.querySelector('input[name="view"]');
 	const paginationLinks = document.querySelectorAll("#attendancePagination .c-pagination__link[href]");
-
+	
 	if (!attendanceToggleBtn || !detailSection || !attendanceSection) return;
+		
 	//페이징 계속보기
 	function updatePaginationView(viewValue) {
 		paginationLinks.forEach(function (link) {

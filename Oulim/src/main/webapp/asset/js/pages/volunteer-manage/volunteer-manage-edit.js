@@ -40,6 +40,7 @@ function isValidHour(value) {
 	return /^(0|[1-9]|1[0-9]|2[0-3])$/.test(value);
 }
 
+
 form.addEventListener("submit", function (e) {
 
 	// 1. 필수값 검사

@@ -158,6 +158,7 @@ registerButton.addEventListener("click", (e) => {
 
 	form.submit();
 });
+
 // 주소 검색
 function sample4_execDaumPostcode() {
     new kakao.Postcode({

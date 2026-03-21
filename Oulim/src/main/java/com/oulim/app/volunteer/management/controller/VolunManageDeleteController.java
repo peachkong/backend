@@ -22,7 +22,7 @@ public class VolunManageDeleteController implements Execute {
 
 		volunteerMangementDAO.volManageDelete(volunActNo);
 
-		result.setPath(request.getContextPath() + "/volunteer-manage/list.vm");
+		result.setPath(request.getContextPath() + "/volunteer-manage/list.vm?message=deleteSuccess");
 		result.setRedirect(true);
 
 		return result;
