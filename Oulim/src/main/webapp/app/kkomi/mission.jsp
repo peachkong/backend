@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    
 <!doctype html>
 <html lang="ko">
 <head>
@@ -23,7 +25,25 @@
   <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
 
-   
+   <script>
+		const contextPath = "${pageContext.request.contextPath}";
+		<script>
+		const missionData = [
+		<c:forEach var="mission" items="${missionList}" varStatus="status">
+		{
+		    missionID: ${mission.missionID},
+		    missionType: ${mission.missionType},
+		    missionName: "${mission.missionName}",
+		    missionDetail: "${mission.missionDetail}",
+		    missionCurrCount: ${mission.missionCurrCount},
+		    missionNeedCount: ${mission.missionNeedCount},
+		    rewardCount: ${mission.rewardCount},
+		    missionIsReward: ${mission.missionIsReward}
+		}<c:if test="${!status.last}">,</c:if>
+		</c:forEach>
+		];
+		</script>
+   </script>
 </head>
 <body>
   <jsp:include page="/app/include/header.jsp" />
@@ -42,39 +62,29 @@
             <div class="c-tab-content">
                 <div class="c-tab-panel is-active" data-panel="normal">
                     <div class="mission-list">
-                        
-                        <div class="mission-card">
-                            <div class="mission-card__info">
-                                <h3 class="mission-card__title">초보 수행자의 첫걸음</h3>
-                                <p class="mission-card__text">봉사 활동 1회 완료하기</p>
-                                <div class="mission-card__progress-container">
-                                    <div class="mission-card__progress-bar" style="width: 0%;"></div>
-                                    <span class="mission-card__progress-text">진행도 0 / 1</span>
-                                </div>
-                            </div>
-                            <div class="mission-card__reward">
-                                <span class="reward-label">보상</span>
-                                <span class="reward-value">500 DP</span>
-                                <button class="c-button c-button--primary c-button--sm is-disabled" disabled>보상받기</button>
-                            </div>
-                        </div>
-
-                        <div class="mission-card is-complete">
-                            <div class="mission-card__info">
-                                <h3 class="mission-card__title">마을의 수호신</h3>
-                                <p class="mission-card__text">우리 동네 환경 정화 봉사 3회 참여</p>
-                                <div class="mission-card__progress-container">
-                                    <div class="mission-card__progress-bar" style="width: 100%;"></div>
-                                    <span class="mission-card__progress-text">진행도 3 / 3</span>
-                                </div>
-                            </div>
-                            <div class="mission-card__reward">
-                                <span class="reward-label">보상</span>
-                                <span class="reward-value">1,200 DP</span>
-                                <button class="c-button c-button--primary c-button--sm">보상받기</button>
-                            </div>
-                        </div>
-
+                        <c:if test="${not empty missionList}">
+	            			<c:forEach var="mission" items="${missionList}">
+	            			 <div class="mission-card ${mission.missionIsReward ? 'is-complete' : '' }">
+                            	<div class="mission-card__info">
+                                	<h3 class="mission-card__title">${mission.missionName }</h3>
+                                	<p class="mission-card__text">${mission.missionDetail }</p>
+                                	<div class="mission-card__progress-container">
+                                   		 <div class="mission-card__progress-bar" style="width: ${(mission.missionCurrCount * 100) / mission.missionNeedCount}%%;"></div>
+                            	       		 <span class="mission-card__progress-text">진행도 ${mission.missionCurrCount} / ${mission.missionNeedCount}</span>
+                            	    </div>
+                            	</div>
+                            	<div class="mission-card__reward">
+                               		<span class="reward-label">보상</span>
+                                	<span class="reward-value">${mission.rewardCount}</span>
+                                	<button class="c-button c-button--primary c-button--sm 
+                                	 ${mission.missionCurrCount >= mission.missionNeedCount && !mission.missionIsReward ? '' : 'is-disabled'}"
+									    ${mission.missionCurrCount >= mission.missionNeedCount && !mission.missionIsReward ? '' : 'disabled'}>
+									     ${mission.missionIsReward ? '수령완료' : 
+									      (mission.missionCurrCount >= mission.missionNeedCount ? '보상받기' : '진행중')}</button>
+                            	</div>
+                        		</div>
+    	        				</c:forEach>
+            			</c:if>
                     </div>
                 </div>
 

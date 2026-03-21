@@ -9,6 +9,7 @@ import com.oulim.app.kkomi.dto.KkomiDTO;
 import com.oulim.app.kkomi.dto.KkomiJoinDTO;
 import com.oulim.app.kkomi.dto.RankingDTO;
 import com.oulim.app.kkomi.dto.RankingJoinDTO;
+import com.oulim.app.kkomi.dto.UserMissionDTO;
 
 public class KkomiDAO {
 	SqlSession sqlSession;
@@ -55,6 +56,17 @@ public class KkomiDAO {
 	public boolean upsertRanking(RankingDTO ranking) {
 		System.out.println("랭킹 갱신 - upsertRanking");
 		int result = sqlSession.update("kkomi.upsertRanking", ranking);
+		return result < 1 ? false : true;
+	}
+	
+	public List<UserMissionDTO> getMyMission(int userNo){
+		System.out.println("미션 조회 - getMyMission");
+		return sqlSession.selectList("kkomi.selectUserMission", userNo);
+	}
+	
+	public boolean upsertMission(UserMissionDTO userMission) {
+		System.out.println("미션 정보 수정");
+		int result = sqlSession.update("kkomi.upsertUserMission", userMission);
 		return result < 1 ? false : true;
 	}
 }

@@ -89,7 +89,7 @@
 	</update>
 	
 	<!-- 미션 조회 -->
-	<select id="selectUserMission" parameterType="int">
+	<select id="selectUserMission" parameterType="int" resultType="UserMissionDTO">
 		SELECT tm.MISSION_ID AS mission_id,
 			tm.MISSION_NAME AS mission_name,
 			tm.MISSION_DETAIL AS mission_detail,
@@ -99,8 +99,21 @@
 			NVL(tum.USER_NO,#{userNo}) AS user_no,
 			NVL(tum.MISSION_IS_REWARD,0) AS mission_is_reward,
 			tum.MISSION_LAST_UPDATE_DATE AS mission_last_update_date,
-			NVL(tum.MISSION_COUNT,0) AS mission_count
+			NVL(tum.MISSION_COUNT,0) AS mission_curr_count
 		FROM tbl_mission tm
-		LEFT JOIN TBL_USER_MISSION tum ON tm.MISSION_ID = tum.MISSION_ID AND tum.USER_NO = #{userNo};
+		LEFT JOIN TBL_USER_MISSION tum ON tm.MISSION_ID = tum.MISSION_ID AND tum.USER_NO = #{userNo}
 	</select>
+	
+	<!-- 미션 갱신 -->
+	<update id="upsertUserMission" parameterType="UserMissionDTO">
+		MERGE INTO TBL_USER_MISSION tm USING (
+		SELECT #{userNo} AS user_no FROM DUAL
+		) src ON (tm.user_no = src.user_no)
+		WHEN MATCHED THEN
+			UPDATE SET mission_count = #{missionCurrCount}, mission_is_reward = #{missionIsReward}, 
+			mission_last_update_date = #{missionLastUpdateDate}
+		WHNE NOT MATHCED THEN
+			INSERT(mission_id, user_no, mission_count,mission_is_reward, mission_last_update_date)
+			VALUES(#{missionId}, #{userNo}, #{missionCount}, #{missionIsReward}, #{missionLastUpdateDate)
+	</update>
 </mapper>

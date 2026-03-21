@@ -1,6 +1,9 @@
 package com.oulim.app.kkomi.dto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+import com.oulim.app.common.util.DefineType;
 
 public class UserMissionDTO {
 //	CREATE TABLE TBL_USER_MISSION(
@@ -30,6 +33,12 @@ public class UserMissionDTO {
 	private boolean missionIsReward; // 보상 수령 여부
 	private LocalDateTime lastUpdateDate; // 마지막 미션 변동 시기 
 	private int missionType; // 미션 타입
+	private int rewardCount;
+	
+	public boolean isNeedReset() {
+		return this.missionType == DefineType.DAILY_MISSION &&
+				(lastUpdateDate == null || lastUpdateDate.toLocalDate().isBefore(LocalDate.now()));
+	}
 	public int getMissionID() {
 		return missionID;
 	}
@@ -84,12 +93,18 @@ public class UserMissionDTO {
 	public void setMissionType(int missionType) {
 		this.missionType = missionType;
 	}
-	
+	public int getRewardCount() {
+		return rewardCount;
+	}
+	public void setRewardCount(int rewardCount) {
+		this.rewardCount = rewardCount;
+	}
 	@Override
 	public String toString() {
 		return "UserMissionDTO [missionID=" + missionID + ", userNo=" + userNo + ", missionName=" + missionName
 				+ ", missionDetail=" + missionDetail + ", missionCurrCount=" + missionCurrCount + ", missionNeedCount="
 				+ missionNeedCount + ", missionIsReward=" + missionIsReward + ", lastUpdateDate=" + lastUpdateDate
-				+ ", missionType=" + missionType + "]";
-	}	
+				+ ", missionType=" + missionType + ", rewardCount=" + rewardCount + "]";
+	}
+
 }
