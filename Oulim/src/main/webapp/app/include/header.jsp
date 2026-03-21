@@ -49,7 +49,16 @@
 							<h4>${sessionScope.userType == 1 ? sessionScope.userNickname : sessionScope.organName} 님</h4>
 						</div>
 						<div>
-						<a class="c-button c-button--secondary c-button--md" href="${pageContext.request.contextPath}/mypage/check.mp">마이페이지</a>
+							<c:choose>
+								<c:when test="${sessionScope.userType == 2}">
+									<a class="c-button c-button--secondary c-button--md"
+									   href="${pageContext.request.contextPath}/mypage-organ/check.mp">마이페이지</a>
+								</c:when>
+								<c:otherwise>
+									<a class="c-button c-button--secondary c-button--md"
+									   href="${pageContext.request.contextPath}/mypage/check.mp">마이페이지</a>
+								</c:otherwise>
+							</c:choose>
 						</div>
 						<div>
 						<a class="c-button c-button--secondary c-button--md" href="${pageContext.request.contextPath}/user/logout.usr">로그아웃</a>
