@@ -83,7 +83,7 @@
 
             <div class="storage-footer">
                 <button class="c-button c-button--secondary c-button--md" 
-                        onclick="location.href='Kkomi-training-center.html'">
+                        onclick="location.href='${pageContext.request.contextPath}/kkomi/info.kko'">
                     수련소로 돌아가기
                 </button>
             </div>

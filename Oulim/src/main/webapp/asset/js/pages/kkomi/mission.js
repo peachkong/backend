@@ -6,6 +6,8 @@
 // 1. 테스트 데이터 (실제 프로젝트에서는 DB에서 불러온 JSON 형태가 됩니다)
 
 document.addEventListener('DOMContentLoaded', () => {
+    console.log(missionData);
+
     // 초기 렌더링 (전체/일반 탭 시작)
     renderMissions('normal');
 
@@ -30,22 +32,22 @@ document.addEventListener('DOMContentLoaded', () => {
  */
 function renderMissions(type) {
     const listContainer = document.querySelector('.mission-list');
-	if (!listContainer || !Array.isArray(missionData)) return;
+    if (!listContainer || !Array.isArray(missionData)) return;
 
-	const filteredData = missionData.filter(item => {
-	    if (type === 'normal') return item.missionType === 1;
-	    if (type === 'daily') return item.missionType === 2;
-	    return false;
-	});
+    const filteredData = missionData.filter(item => {
+        if (type === 'normal') return item.missionType === 1;
+        if (type === 'daily') return item.missionType === 2;
+        return false;
+    });
     if (filteredData.length === 0) {
         listContainer.innerHTML = `<div class="empty-state">준비된 미션이 없습니다.</div>`;
         return;
     }
 
     listContainer.innerHTML = filteredData.map(item => {
-		const percent = item.missionNeedCount > 0
-		    ? Math.min((item.missionCurrCount / item.missionNeedCount) * 100, 100)
-		    : 0;
+        const percent = item.missionNeedCount > 0
+            ? Math.min((item.missionCurrCount / item.missionNeedCount) * 100, 100)
+            : 0;
 
         const isComplete = item.missionCurrCount >= item.missionNeedCount;
         const isRewarded = item.missionIsReward;

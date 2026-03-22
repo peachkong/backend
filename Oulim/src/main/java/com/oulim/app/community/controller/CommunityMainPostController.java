@@ -55,7 +55,7 @@ public class CommunityMainPostController implements Execute {
 					json.append("\"postNo\":\"").append(post.getPostNo()).append("\",");
 					json.append("\"userNickname\":\"").append(escapeJson(post.getUserNickname())).append("\",");
 					json.append("\"postTitle\":\"").append(escapeJson(post.getPostTitle())).append("\",");
-					json.append("\"postImage\":\"").append(escapeJson(post.getImages().get(0).getPostImgOriginName())).append("\"");
+					json.append("\"postImage\":\"").append(escapeJson(post.getImages().get(0).getPostImgSystemName())).append("\"");
 					json.append("}");
 					if (i < postList.size() - 1) {
 						json.append(",");

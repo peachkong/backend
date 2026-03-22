@@ -3,28 +3,35 @@
 
 <mapper namespace="kkomi">
 	<!-- 꼬미 조회 -->
-	<select id="selectKkomi" parameterType="int" resultType="KkomiDTO">
+	<select id="selectKkomi" parameterType="int"
+		resultType="KkomiDTO">
 		SELECT tk.kkomi_no, tk.kkomi_lev, tk.kkomi_Exp
 		FROM
 		tbl_kkomi tk
 		WHERE #{userNo} = tk.user_no
 	</select>
-	
+
 	<!-- 꼬미 종합 데이터 조회 -->
-	<select id="selectKkomiJoin" parameterType="int" resultType="KkomiJoinDTO">
-		SELECT NVL(tk.kkomi_no,1) as kkomi_no, NVL(tk.kkomi_lev, 1) as kkomi_lev, NVL(tk.kkomi_Exp,0) as kkomi_exp,
-		NVL(tc.total_Amount,0) as point, NVL(r.my_Ranking, 0) as my_ranking
+	<select id="selectKkomiJoin" parameterType="int"
+		resultType="KkomiJoinDTO">
+		SELECT NVL(tk.kkomi_no,1) as kkomi_no, NVL(tk.kkomi_lev, 1)
+		as kkomi_lev, NVL(tk.kkomi_Exp,0) as kkomi_exp,
+		NVL(tc.total_Amount,0)
+		as point, NVL(r.my_Ranking, 0) as my_ranking
 		FROM tbl_user tu
-		LEFT JOIN tbl_kkomi tk on tu.user_no = tk.user_no
-		LEFT JOIN tbl_currency tc on (tu.user_no = tc.user_no and tc.currency_id = 1)
-		LEFT JOIN 
+		LEFT JOIN
+		tbl_kkomi tk on tu.user_no = tk.user_no
+		LEFT JOIN tbl_currency tc on
+		(tu.user_no = tc.user_no and tc.currency_id = 1)
+		LEFT JOIN
 		(
-			SELECT user_No, RANK() OVER(ORDER BY tr.Rank_Point DESC) as my_ranking 
-			FROM tbl_ranking tr 
-			where tr.rank_season_info = TO_NUMBER(TO_CHAR(sysdate,'YYYYMM'))
+		SELECT user_No, RANK() OVER(ORDER BY tr.Rank_Point DESC) as my_ranking
+		FROM tbl_ranking tr
+		where tr.rank_season_info = TO_NUMBER(TO_CHAR(sysdate,'YYYYMM'))
 		) r
-		on tu.user_no = r.user_no
-		WHERE tu.user_no = #{userNo} 		
+		on
+		tu.user_no = r.user_no
+		WHERE tu.user_no = #{userNo}
 	</select>
 
 	<!-- 꼬미 도력 쌓기 -->
@@ -43,7 +50,8 @@
 	</update>
 
 	<!-- 상위권 포함 랭킹 조회 -->
-	<select id="selectTopRanking" parameterType="int" resultType="RankingJoinDTO">
+	<select id="selectTopRanking" parameterType="int"
+		resultType="RankingJoinDTO">
 	<![CDATA[
 	SELECT * FROM
 		(SELECT tr.user_no, tr.Rank_point as rank_Point, DENSE_RANK() OVER(ORDER BY tr.Rank_Point DESC) AS ranking, 
@@ -58,62 +66,78 @@
 	</select>
 
 	<!-- 조인된 내 랭킹 조회 -->
-	<select id="selectMyJoinRanking" parameterType="int" resultType="RankingJoinDTO">
+	<select id="selectMyJoinRanking" parameterType="int"
+		resultType="RankingJoinDTO">
 		SELECT
-		tr.user_no, tr.Rank_point,	DENSE_RANK() OVER(ORDER BY tr.Rank_Point DESC) AS ranking, 
-		tnu.user_Nickname,	tk.kkomi_Lev
+		tr.user_no, tr.Rank_point, DENSE_RANK() OVER(ORDER BY
+		tr.Rank_Point DESC) AS ranking,
+		tnu.user_Nickname, tk.kkomi_Lev
 		FROM TBL_RANKING tr
-		JOIN TBL_NORMAL_USER tnu ON tr.user_no = tnu.user_no
+		JOIN TBL_NORMAL_USER tnu ON tr.user_no
+		= tnu.user_no
 		JOIN TBL_KKOMI tk ON tr.user_no = tk.user_no
-		WHERE tr.rank_season_info = TO_NUMBER(TO_CHAR(sysdate,'YYYYMM'))
-		AND tr.user_no = #{userNo}
+		WHERE
+		tr.rank_season_info = TO_NUMBER(TO_CHAR(sysdate,'YYYYMM'))
+		AND
+		tr.user_no = #{userNo}
 	</select>
-	
+
 	<!-- 내 랭킹 조회 -->
-	<select id="selectMyRanking" parameterType="int" resultType="RankingDTO">
+	<select id="selectMyRanking" parameterType="int"
+		resultType="RankingDTO">
 		SELECT tr.user_no, tr.rank_point, tr.rank_season_info
-		FROM TBL_RANKING tr
-		WHERE tr.rank_season_info = TO_NUMBER(TO_CHAR(sysdate,'YYYYMM')) AND tr.user_no = #{userNo}
+		FROM
+		TBL_RANKING tr
+		WHERE tr.rank_season_info =
+		TO_NUMBER(TO_CHAR(sysdate,'YYYYMM')) AND tr.user_no = #{userNo}
 	</select>
 
 	<!-- 랭킹 삽입 -->
 	<update id="upsertRanking" parameterType="RankingDTO">
-		MERGE INTO TBL_RANKING tr USING(
-			SELECT #{userNo} as user_no, TO_NUMBER(TO_CHAR(sysdate,'YYYYMM')) as curr_season FROM DUAL) src
-			ON (src.user_no = tr.user_no and src.curr_season = tr.Rank_Season_Info)
+		MERGE INTO TBL_RANKING
+		tr USING(
+		SELECT #{userNo} as user_no, TO_NUMBER(TO_CHAR(sysdate,'YYYYMM')) as
+		curr_season FROM DUAL) src
+		ON (src.user_no = tr.user_no and src.curr_season = tr.Rank_Season_Info)
 		WHEN MATCHED THEN
-			UPDATE SET tr.rank_Point = tr.rank_Point + #{rankPoint}
+		UPDATE SET tr.rank_Point = tr.rank_Point + #{rankPoint}
 		WHEN NOT MATCHED THEN
-			INSERT (user_no, rank_point, rank_season_info)
-			VALUES ( #{userNo}, #{rankPoint}, src.curr_season)
+		INSERT (user_no, rank_point, rank_season_info)
+		VALUES ( #{userNo}, #{rankPoint}, src.curr_season)
 	</update>
-	
+
 	<!-- 미션 조회 -->
-	<select id="selectUserMission" parameterType="int" resultType="UserMissionDTO">
+	<select id="selectUserMission" parameterType="int"
+		resultType="UserMissionDTO">
 		SELECT tm.MISSION_ID AS mission_id,
-			tm.MISSION_NAME AS mission_name,
-			tm.MISSION_DETAIL AS mission_detail,
-			tm.MISSION_NEEDCOUNT AS mission_need_count,
-			tm.MISSION_TYPE AS mission_type ,
-			tm.REWARD_ID AS reward_id,
-			NVL(tum.USER_NO,#{userNo}) AS user_no,
-			NVL(tum.MISSION_IS_REWARD,0) AS mission_is_reward,
-			tum.MISSION_LAST_UPDATE_DATE AS mission_last_update_date,
-			NVL(tum.MISSION_COUNT,0) AS mission_curr_count
+		tm.MISSION_NAME AS mission_name,
+		tm.MISSION_DETAIL AS mission_detail,
+		tm.MISSION_NEEDCOUNT AS mission_need_count,
+		tm.MISSION_TYPE AS mission_type ,
+		tm.REWARD_ID AS reward_id,
+		NVL(tum.USER_NO,#{userNo}) AS user_no,
+		NVL(tum.MISSION_IS_REWARD,0) AS mission_is_reward,
+		tum.MISSION_LAST_UPDATE_DATE AS mission_last_update_date,
+		NVL(tum.MISSION_COUNT,0) AS mission_curr_count
 		FROM tbl_mission tm
-		LEFT JOIN TBL_USER_MISSION tum ON tm.MISSION_ID = tum.MISSION_ID AND tum.USER_NO = #{userNo}
+		LEFT JOIN TBL_USER_MISSION
+		tum ON tm.MISSION_ID = tum.MISSION_ID AND tum.USER_NO = #{userNo}
 	</select>
-	
+
 	<!-- 미션 갱신 -->
 	<update id="upsertUserMission" parameterType="UserMissionDTO">
-		MERGE INTO TBL_USER_MISSION tm USING (
+		MERGE INTO
+		TBL_USER_MISSION tm USING (
 		SELECT #{userNo} AS user_no FROM DUAL
-		) src ON (tm.user_no = src.user_no)
+		) src
+		ON (tm.user_no = src.user_no)
 		WHEN MATCHED THEN
-			UPDATE SET mission_count = #{missionCurrCount}, mission_is_reward = #{missionIsReward}, 
-			mission_last_update_date = #{missionLastUpdateDate}
+		UPDATE SET mission_count = #{missionCurrCount}, mission_is_reward =
+		#{missionIsReward},
+		mission_last_update_date = #{missionLastUpdateDate}
 		WHNE NOT MATHCED THEN
-			INSERT(mission_id, user_no, mission_count,mission_is_reward, mission_last_update_date)
-			VALUES(#{missionId}, #{userNo}, #{missionCount}, #{missionIsReward}, #{missionLastUpdateDate)
+		INSERT(mission_id, user_no, mission_count,mission_is_reward, mission_last_update_date)
+		VALUES(#{missionId}, #{userNo}, #{missionCount}, #{missionIsReward},
+		#{missionLastUpdateDate)
 	</update>
 </mapper>

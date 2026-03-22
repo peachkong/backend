@@ -66,7 +66,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         rGrid.innerHTML = rList.map(r => `
 			<a href="${contextPath}/community/detail.commu?postNo=${r.postNo}">
             <div class="c-review-card">
-                <div class="review-img"><img src="${contextPath}/upload/${r.postImage}"></div>
+                <div class="review-img"><img src="${contextPath}/upload/${r.postImage}"
+				onerror="this.onerror=null; this.src='${contextPath}/asset/image/logo/logo.png';"></div>
                 <div class="review-content">
                     <h4>${r.postTitle}</h4>
                     <p style="color:#76b13a; margin-top:10px;">${r.userNickname}</p>

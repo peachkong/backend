@@ -32,9 +32,9 @@
   	<script>
     	const contextPath = "${pageContext.request.contextPath}";
     	const postNo = "${post.postNo}";
-    	const userNo = "${post.userNo}";
-    	const isLogin = ${not empty sessionScope.userNo ? 'true' : 'false'};
-    	const loginUserNo = ${sessionScope.userNo != null ? sessionScope.userNo : -1};
+    	const userNo = Number(${post.userNo});
+    	const isLogin = ${not empty sessionScope.userNo};
+    	const loginUserNo = Number(${sessionScope.userNo != null ? sessionScope.userNo : -1});
     	const userType = ${sessionScope.userType != null ? sessionScope.userType : -1};
     	const userNickname = "${sessionScope.userNickname != null ? sessionScope.userNickname : ''}";
     </script>
@@ -46,6 +46,9 @@
     <main class="l-main">
       <div class="l-container">
         <!-- 팀원들 작성 영역 이 안에서 작업하기!!퍼블 작업진행 -->
+        <div class="l-return-button">
+          <button class="c-button c-button--primary c-button--sm">목록으로 돌아가기</button>
+        </div>
         <div class="p-community-detail">
           <div class=""><h2>${post.postTitle}</h2></div>
           <div class="l-community-detail-author-group">
@@ -146,10 +149,21 @@
             </div>
         </div>
         
-        <div class="l-return-button">
-          <button class="c-button c-button--primary c-button--lg">목록으로 돌아가기</button>
-        </div>
-      </div>
+
+       <c:if test="${post.userNo eq sessionScope.userNo }">
+      	<div class="l-repost-delete-btn-group">
+	      	<div class="c-button-group">
+	                <div>
+	                  <button type="button" id="repostBtn" class="c-button c-button--primary c-button--md"
+	                  onclick="${contextPath}/community/repost.commu">수정</button>
+	                </div>
+	                <div>
+	                  <button type="button" id="deleteBtn" class="c-warning-delete-button">삭제</button>
+	                </div>
+	      	</div>
+	     </div>
+       </c:if>
+     </div>
     </main>
 
     <!-- Footer 자동 삽입 -->

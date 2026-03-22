@@ -31,7 +31,8 @@ public class CommunityUpdateOkController implements Execute {
 		CommunityFileDAO commuFileDAO = new CommunityFileDAO();
 		Result result = new Result();
 		
-		if(request.getSession().getAttribute("userNo") == null) {
+		if(request.getSession().getAttribute("userNo") == null ||
+				request.getSession().getAttribute("userNickname") == null) {
 			result.setPath(request.getContextPath() + "/app/user/login/login.jsp");
 			result.setRedirect(true);
 			return result;
@@ -111,6 +112,7 @@ public class CommunityUpdateOkController implements Execute {
 		}
 		// 게시물 업데이트 실행
 		commuDTO.setUserNo((Integer)request.getSession().getAttribute("userNo"));
+		commuDTO.setUserNickname((String)request.getSession().getAttribute("userNickname"));
 		commuDAO.repostPost(commuDTO);
 		System.out.println("게시글 수정 완료");
 		

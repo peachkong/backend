@@ -59,7 +59,7 @@
         <div class="p-rank__my">
         </div>
         
-        <button class="c-button c-button--secondary c-button--md" onclick="location.href=${pageContext.request.contextPath}/kkomi/info.kko">
+        <button class="c-button c-button--secondary c-button--md" onclick="location.href='${contextPath}/kkomi/info.kko'">
           수련소로 돌아가기
         </button>
       </section>

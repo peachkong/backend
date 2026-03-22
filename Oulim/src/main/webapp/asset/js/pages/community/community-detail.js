@@ -5,6 +5,7 @@ const recommendBtn = document.querySelector("#recommendBtn");
 
 // 목록으로 돌아가기 버튼
 const returnBtn = document.querySelector(".l-return-button .c-button");
+const deleteBtn = document.querySelector("#deleteBtn");
 
 const USER_TYPE = {
 	ADMIN: 0,
@@ -12,6 +13,7 @@ const USER_TYPE = {
 	COMPANY: 2
 };
 document.addEventListener("DOMContentLoaded", ()=>{
+	console.log("userNo: " + userNo + "logintUserNo :" + loginUserNo);
 	commentPostBtn.addEventListener("click", async (e) => {
 		const commentText = document.querySelector("#commentContent").value;
 		console.log("댓글 작성 버튼 클릭");
@@ -109,6 +111,32 @@ document.addEventListener("DOMContentLoaded", ()=>{
 		await loadComments(page);
 	});
 	
+	
+	deleteBtn?.addEventListener("click",async (e) =>{
+		if(!postNo){
+			return alert("존재하지 않는 글입니다.");
+		}
+		
+		if(!confirm("정말 삭제하시겠습니까?")){
+			return;
+		}
+		
+		try{
+			const res = await fetch(`/community/postDelete.commu?postNo=${encodeURIComponent(postNo)}`,{
+				method:"POST",
+				headers:{"X-Requested-With" : "fetch"},
+			});
+			if(!res.ok){
+				throw new Error("삭제 요청 실패");
+			}
+			
+			alert("게시글이 삭제되었습니다.");
+			window.location.href=`${contextPath}/community/list.commu`;
+		}catch(err){
+			console.error("게시글 삭제 실패 : ", err);
+			alert("게시글 삭제에 실패했습니다");
+		}
+	});
 })
 
 

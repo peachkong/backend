@@ -27,7 +27,6 @@
 
    <script>
 		const contextPath = "${pageContext.request.contextPath}";
-		<script>
 		const missionData = [
 		<c:forEach var="mission" items="${missionList}" varStatus="status">
 		{
@@ -42,7 +41,6 @@
 		}<c:if test="${!status.last}">,</c:if>
 		</c:forEach>
 		];
-		</script>
    </script>
 </head>
 <body>
@@ -62,29 +60,6 @@
             <div class="c-tab-content">
                 <div class="c-tab-panel is-active" data-panel="normal">
                     <div class="mission-list">
-                        <c:if test="${not empty missionList}">
-	            			<c:forEach var="mission" items="${missionList}">
-	            			 <div class="mission-card ${mission.missionIsReward ? 'is-complete' : '' }">
-                            	<div class="mission-card__info">
-                                	<h3 class="mission-card__title">${mission.missionName }</h3>
-                                	<p class="mission-card__text">${mission.missionDetail }</p>
-                                	<div class="mission-card__progress-container">
-                                   		 <div class="mission-card__progress-bar" style="width: ${(mission.missionCurrCount * 100) / mission.missionNeedCount}%%;"></div>
-                            	       		 <span class="mission-card__progress-text">진행도 ${mission.missionCurrCount} / ${mission.missionNeedCount}</span>
-                            	    </div>
-                            	</div>
-                            	<div class="mission-card__reward">
-                               		<span class="reward-label">보상</span>
-                                	<span class="reward-value">${mission.rewardCount}</span>
-                                	<button class="c-button c-button--primary c-button--sm 
-                                	 ${mission.missionCurrCount >= mission.missionNeedCount && !mission.missionIsReward ? '' : 'is-disabled'}"
-									    ${mission.missionCurrCount >= mission.missionNeedCount && !mission.missionIsReward ? '' : 'disabled'}>
-									     ${mission.missionIsReward ? '수령완료' : 
-									      (mission.missionCurrCount >= mission.missionNeedCount ? '보상받기' : '진행중')}</button>
-                            	</div>
-                        		</div>
-    	        				</c:forEach>
-            			</c:if>
                     </div>
                 </div>
 
@@ -94,7 +69,7 @@
             </div>
 
             <div class="mission-footer">
-                <button class="c-button c-button--secondary c-button--lg" onclick="location.href='/training'">수련소로 돌아가기</button>
+                <button class="c-button c-button--secondary c-button--lg" onclick="location.href='${contextPath}/kkomi/info.kko'">수련소로 돌아가기</button>
             </div>
         </div>
     </main>  
