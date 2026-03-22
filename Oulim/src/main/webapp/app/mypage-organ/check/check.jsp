@@ -32,6 +32,9 @@
 	href="${pageContext.request.contextPath}/asset/css/pages/main/header-login.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/asset/css/pages/main/footer.css" />
+	 <script>
+ const contextPath = "${pageContext.request.contextPath}";  
+</script>
 </head>
 
 <body>
@@ -78,11 +81,11 @@
 						</div>
 
 						<div class="p-mypage-check--input">
-							<input type="password" id="password" class="c-input" name="userPw"
+							<input type="password" id="userPw" class="c-input" name="userPw"
 								placeholder="비밀번호 입력" />
+							<button type="button" id="c-password-btn-toggle">			
 								<img src="${pageContext.request.contextPath}/asset/image/user/password-off.png"
 									alt="eye" id="c-password-toggle-img" />
-							<button type="button" id="c-password-btn-toggle">			
 							</button>
 						</div>
 
