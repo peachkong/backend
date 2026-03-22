@@ -134,7 +134,7 @@
 		      <c:choose>
 		        <c:when test="${not empty volunList}">
 			      <c:forEach var="v" items="${volunList}">
-			      <a>
+			      <a href="${pageContext.request.contextPath}/admin/volundetail.adm?volunActNo=${v.volunActNo}">
 			        <div class="c-list__row">
 						<div class="c-list__col">${v.volunActNo}</div>
 						<div class="c-list__col">${v.volunActTitle}</div>

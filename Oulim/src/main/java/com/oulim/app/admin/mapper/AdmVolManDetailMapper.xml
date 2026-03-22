@@ -1,43 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="AdmVolManDeta">
-<select id="selectVolunDetail" parameterType="int" resultType="VolunActivityDTO">
-    SELECT
-        VOLUN_ACT_NO            AS volunActNo,
-        VOLUN_ACT_TITLE         AS volunActTitle,
-        TO_CHAR(VOLUN_ACT_RECRU_BEGIN, 'YY.MM.DD') AS recruBegin,
-        TO_CHAR(VOLUN_ACT_RECRU_END, 'YY.MM.DD')   AS recruEnd,
-        VOLUN_ACT_RECRU_MAX_COUNT AS maxCount
-    FROM TBL_VOLUN_ACTIVITY
-    WHERE VOLUN_ACT_NO = #{volunActNo}
-</select>
 
-<select id="selectApplyUserList" parameterType="map" resultType="VolunApplyDTO">
-<![CDATA[
-SELECT *
-FROM (
-    SELECT ROWNUM rn, T.*
-    FROM (
-        SELECT
-            A.USER_NO        AS userNo,
-            U.USER_NAME      AS userName,
-            U.USER_ID        AS userId,
-            FLOOR(MONTHS_BETWEEN(SYSDATE, U.USER_BIRTH)/12) AS userAge,
-            TO_CHAR(A.VOLUNACT_APPLYDATE, 'YY.MM.DD') AS volunActApplyDate
-        FROM TBL_VOLUN_APPLY A
-        JOIN TBL_USER U ON A.USER_NO = U.USER_NO
-        WHERE A.VOLUN_ACT_NO = #{volunActNo}
-        ORDER BY A.VOLUNACT_APPLYDATE DESC
-    ) T
-    WHERE ROWNUM <= #{endRow}
-)
-WHERE rn >= #{startRow}
-]]>
-</select>
-
-<select id="selectApplyCount" parameterType="int" resultType="int">
-    SELECT COUNT(*)
-    FROM TBL_VOLUN_APPLY
+<update id="deleteApplyUser" parameterType="map">
+    UPDATE TBL_VOLUN_APPLY
+    SET VOLUNACT_APPLYSTATUS = 0
     WHERE VOLUN_ACT_NO = #{volunActNo}
-</select>
+      AND USER_NO = #{userNo}
+</update>
+
 </mapper>

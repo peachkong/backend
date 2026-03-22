@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.oulim.app.admin.dao.AdmVolunDetaDAO;
 import com.oulim.app.common.controller.Execute;
 import com.oulim.app.common.controller.Result;
+import com.oulim.app.volunteer.dao.VolunteerMangementDAO;
 import com.oulim.app.volunteer.dto.VolunActivityDTO;
 import com.oulim.app.volunteer.dto.VolunApplyDTO;
 
@@ -21,83 +22,110 @@ public class AdmVolManDetaController implements Execute {
     public Result execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        System.out.println("========== [AdmVolManDetaController START] ==========");
+
         Result result = new Result();
-        AdmVolunDetaDAO dao = new AdmVolunDetaDAO();
+
+        // DAO
+        VolunteerMangementDAO volunDAO = new VolunteerMangementDAO();  // 조회
+        AdmVolunDetaDAO adminDAO = new AdmVolunDetaDAO();              // 삭제
 
         // =========================
-        // 1. 봉사번호 기본값 처리 (
+        // 1. 파라미터
         // =========================
-        int volunActNo = 4; // 기본값
-
-        try {
-            String param = request.getParameter("volunActNo");
-            if (param != null && !param.trim().isEmpty()) {
-                volunActNo = Integer.parseInt(param);
-            }
-        } catch (Exception e) {
-            System.out.println("❌ volunActNo 파싱 실패 → 기본값 4 사용");
-        }
+        int volunActNo = Integer.parseInt(request.getParameter("volunActNo"));
+        String userNoParam = request.getParameter("userNo");
 
         System.out.println("volunActNo: " + volunActNo);
+        System.out.println("userNoParam: " + userNoParam);
+	
+	     // =========================
+	     // 2. 삭제
+	     // =========================
+	     if (userNoParam != null && !userNoParam.isEmpty()) {
+	         int userNo = Integer.parseInt(userNoParam);
+	
+	         Map<String, Integer> paramMap = new HashMap<>();
+	         paramMap.put("volunActNo", volunActNo);
+	         paramMap.put("userNo", userNo);
+	
+	         adminDAO.deleteApplyUser(paramMap);
+	
+	         System.out.println("삭제 완료 userNo=" + userNo);
+	
+	         //  redirect로 재조회
+	         result.setRedirect(true);
+	         result.setPath(request.getContextPath()
+	             + "/admin/volundetail.adm?volunActNo=" + volunActNo);
+	
+	         return result; 
+	     }
 
         // =========================
-        // 2. 봉사 상세 조회
+        // 3. 봉사 상세
         // =========================
-        VolunActivityDTO detail = dao.selectVolunDetail(volunActNo);
+        VolunActivityDTO detail = volunDAO.selectVolManageDetail(volunActNo);
+
         System.out.println("detail: " + detail);
 
+        if (detail == null) {
+            System.out.println(" detail null");
+            result.setPath("/error/404.jsp");
+            return result;
+        }
+
         // =========================
-        // 3. 신청 인원 수
+        // 4. 신청 인원 수
         // =========================
-        int applyCount = dao.selectApplyCount(volunActNo);
+        int applyCount = volunDAO.selectApplyCount(volunActNo);
         System.out.println("applyCount: " + applyCount);
 
         // =========================
-        // 4. 페이징 처리
+        // 5. 페이징
         // =========================
         int page = 1;
         int rowCount = 10;
 
         try {
-            String pageParam = request.getParameter("page");
-            if (pageParam != null) {
-                page = Integer.parseInt(pageParam);
-            }
+            page = Integer.parseInt(request.getParameter("page"));
         } catch (Exception e) {
-            System.out.println("❌ page 파싱 실패 → 기본값 1 사용");
+            page = 1;
         }
 
         int startRow = (page - 1) * rowCount + 1;
         int endRow = page * rowCount;
 
-        System.out.println("page: " + page);
-        System.out.println("startRow: " + startRow + ", endRow: " + endRow);
+        // =========================
+        // 6. 신청자 리스트
+        // =========================
+        Map<String, Integer> pageMap = new HashMap<>();
+        pageMap.put("volunActNo", volunActNo);
+        pageMap.put("startRow", startRow);
+        pageMap.put("endRow", endRow);
+
+        List<VolunApplyDTO> volunList = volunDAO.applyVolSelectPage(pageMap);
+
+        System.out.println("volunList size: " + (volunList != null ? volunList.size() : "null"));
 
         // =========================
-        // 5. 신청자 리스트 조회
-        // =========================
-        Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("volunActNo", volunActNo);
-        paramMap.put("startRow", startRow);
-        paramMap.put("endRow", endRow);
-
-        List<VolunApplyDTO> list = dao.selectApplyUserList(paramMap);
-
-        System.out.println("list size: " + (list != null ? list.size() : "null"));
-
-        // =========================
-        // 6. request 세팅
+        // 7. request 세팅
         // =========================
         request.setAttribute("detail", detail);
         request.setAttribute("applyCount", applyCount);
-        request.setAttribute("volunList", list);
+        request.setAttribute("volunList", volunList);
         request.setAttribute("page", page);
+        request.setAttribute("volunActNo", volunActNo);
 
         // =========================
-        // 7. 이동
+        // 8. 이동
         // =========================
         result.setPath("/app/admin/jsp/volunteer-manage/volun-detail.jsp");
         result.setRedirect(false);
+        
+        System.out.println("path: " + result.getPath());
+        System.out.println("redirect: " + result.isRedirect());
+        System.out.println("userNoParam: " + userNoParam);
+        System.out.println("========== [AdmVolManDetaController END] ==========");
 
         return result;
     }

@@ -30,26 +30,36 @@
 		    <div class="info-section">
 		        <article class="v-detail-info">
 					<div class="v-detail-info__header">
-					    <span class="c-badge c-badge--primary">
-					        ${detail.recruStatus}
-					    </span>
-					    <span class="c-badge c-badge--orange">
-					        ${detail.actTypeName}
-					    </span>
+						<span class="c-badge c-badge--primary">
+						    ${detail.recruStatus}
+						</span> 
+						<span class="c-badge c-badge--orange">
+						    <c:choose>
+						        <c:when test="${detail.volunActAgeGroup == 1}">청소년</c:when>
+						        <c:when test="${detail.volunActAgeGroup == 2}">청년</c:when>
+						        <c:when test="${detail.volunActAgeGroup == 3}">직장인</c:when>
+						        <c:otherwise>기타</c:otherwise>
+						    </c:choose>
+						</span>
 					</div>
 					
+					<!-- 제목 -->
 					<h2 class="v-detail-info__title">
 					    ${detail.volunActTitle}
 					</h2>
 					
+					<!-- 상세 -->
 					<div class="v-detail-info__body">
+					
+					    <!-- 봉사기간 -->
 					    <div class="v-info-row">
 					        <span class="v-info-label">봉사기간</span>
 					        <span class="v-info-value text-bold">
-					            ${detail.volunActProcBegin} ~ ${detail.volunActProcEnd}
+					           ${detail.volunActProcBegin} ~ ${detail.volunActProcEnd}
 					        </span>
 					    </div>
 					
+					    <!-- 모집현황 -->
 					    <div class="v-info-row">
 					        <span class="v-info-label">신청현황</span>
 					        <span class="v-info-value">
@@ -57,6 +67,23 @@
 					            <span class="text-primary">${applyCount}명 신청 중</span>
 					        </span>
 					    </div>
+					
+					    <!-- 주소 -->
+					    <div class="v-info-row">
+					        <span class="v-info-label">주소</span>
+					        <span class="v-info-value">
+					            ${detail.volunActAddress} ${detail.volunActAddressDetail}
+					        </span>
+					    </div>
+					
+					    <!-- 포인트 -->
+					    <div class="v-info-row">
+					        <span class="v-info-label">포인트</span>
+					        <span class="v-info-value">
+					            ${detail.volunActPoint}P
+					        </span>
+					    </div>
+					
 					</div>
 		        </article>
 		    </div>
@@ -85,10 +112,9 @@
 						            ${status.index + 1}
 						        </div>
 						
-						        <!-- 이름 + ID -->
+						        <!-- 이름 -->
 						        <div class="c-list__col">
 						            ${v.userName}
-						            <span class="user-id">(${v.userId})</span>
 						        </div>
 						
 						        <!-- 나이 -->
@@ -103,10 +129,9 @@
 						
 						        <!-- 삭제 -->
 						        <div class="c-list__col">
-						            <button type="button" class="btn-delete"
-						                onclick="deleteApply(${v.volunActNo}, ${v.userNo})">
-						                삭제
-						            </button>
+									<button class="btn-delete" onclick="location.href='${pageContext.request.contextPath}/admin/volundetail.adm?volunActNo=${v.volunActNo}&userNo=${v.userNo}'">
+									    삭제
+									</button>
 						        </div>
 						
 						    </div>
