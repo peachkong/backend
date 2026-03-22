@@ -114,7 +114,12 @@ public class AdminFrontController extends HttpServlet {
 			System.out.println("게시글 상세 요청");
 			result = new AdminPostDetailController().execute(request, response);
 			break;	
-		
+
+		case "/admin/postdeleteok.adm":
+			System.out.println("게시글 삭제 요청");
+			result = new AdminPostDeleteOkController().execute(request, response);
+			break;	
+			
 		case "/admin/companycertification.adm":
 			System.out.println("신청 기업 목록 요청");
 			result = new AdminCompanyCertificationController().execute(request, response);

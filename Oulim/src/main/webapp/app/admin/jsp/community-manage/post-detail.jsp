@@ -45,11 +45,14 @@
 			<div id="content-area">
 			  <div class="post-name">
 			    <p>${post.postTitle}</p>
-			    <div class="c-list__actions">
-			      <button class="c-button c-button--primary c-button--sm">수정</button>
-			      <button class="c-button c-button--secondary c-button--sm">삭제</button>
-			    </div>
+			       <form action="${pageContext.request.contextPath}/admin/postdeleteok.adm" method="post" onsubmit="return confirm('게시글을 삭제하시겠습니까?');">
+	                  <input type="hidden" name="postNo" value="${post.postNo}" />
+			    	  <button class="c-button c-button--secondary c-button--sm" type="submit">삭제</button>
+	               </form>	
 			  </div>
+			
+	
+			
 			
 			  <div id="post-comment">
 			    <p>작성일 : ${post.postDate}</p>

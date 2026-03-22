@@ -22,8 +22,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/card.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/DetailCard.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/component/badge.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/app/admin/css/community-manage/post-list.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/app/admin/css/community-manage/post-list.css" />
   <script defer src="${pageContext.request.contextPath}/app/admin/js/community-manage/post-list.js"></script>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/app/admin/css/aside.css" />
 </head>
 
 <body>
