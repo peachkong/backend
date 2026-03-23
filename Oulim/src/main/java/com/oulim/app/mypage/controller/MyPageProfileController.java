@@ -43,9 +43,11 @@ public class MyPageProfileController implements Execute{
 		List<MyPageJoinDTO> pointInfo = mypageDAO.miniPoint(userNo);
 		MyPageJoinDTO comVolunInfo = mypageDAO.miniComVol(userNo);
 		
+		
+		
 		if (comVolunInfo != null) {
 		    System.out.println("예정 봉사 " + comVolunInfo.getVolunActTitle());
-
+		    
 		    request.setAttribute("comVolunActTitle", comVolunInfo.getVolunActTitle());
 		    request.setAttribute("comVolunActProcEnd", comVolunInfo.getComVolunActProcEnd());
 		    request.setAttribute("comVolunActProcBegin", comVolunInfo.getComVolunActProcBegin());
@@ -61,7 +63,7 @@ public class MyPageProfileController implements Execute{
 		if (finVolunInfo != null) {
 		    System.out.println("완료 봉사 " + finVolunInfo.getVolunActTitle());
 		    System.out.println("완료 봉사 기간 : " + finVolunInfo.getFinVolunActProcEnd());
-
+		    request.setAttribute("kkomiLev", summaryInfo.getKkomiLev());
 		    request.setAttribute("finVolunActTitle", finVolunInfo.getVolunActTitle());
 		    request.setAttribute("finVolunActProcEnd", finVolunInfo.getFinVolunActProcEnd());
 		    request.setAttribute("finVolunActProcBegin", finVolunInfo.getFinVolunActProcBegin());

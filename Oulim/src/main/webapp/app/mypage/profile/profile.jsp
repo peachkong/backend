@@ -107,7 +107,7 @@
 			<div class="main-2">
 				<div class="main-section1">
 					<img
-						src="${pageContext.request.contextPath}/asset/image/character/komi-lv9.svg"
+						src="${pageContext.request.contextPath}/asset/image/character/komi-lv${empty kkomiLev or kkomiLev == 0 ? 1 : kkomiLev}.svg"
 						alt="펫사진" />
 					<div class="sec1-text">
 						<h1>${sessionScope.userNickname}</h1>
