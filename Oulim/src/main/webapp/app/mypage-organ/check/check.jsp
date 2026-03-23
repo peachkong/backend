@@ -13,7 +13,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/asset/css/core/variable.css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/asset/css/core/typography.css" />
+	href="${pageContext.request.contextPath}/asset/css/core/Typography.css" />
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/asset/css/component/input.css" />
@@ -37,7 +37,7 @@
 </script>
 </head>
 
-<body>
+<body data-message="${param.message}">
 
 	<jsp:include page="/app/include/header.jsp" />
 

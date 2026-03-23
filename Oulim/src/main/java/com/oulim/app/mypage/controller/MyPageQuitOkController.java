@@ -36,6 +36,10 @@ public class MyPageQuitOkController implements Execute {
 		userMap.put("userNo", userNo);
 		userMap.put("userPw", userPw);
 
+		System.out.println("quitOk 들어옴 ㅎㅇㅎㅇ");
+		
+		request.setAttribute("userMap", userMap);
+		
 		if (request.getSession().getAttribute("userNo") == null) {
 			result.setPath(request.getContextPath() + "/app/user/login/login.jsp");
 			result.setRedirect(true);
@@ -51,6 +55,12 @@ public class MyPageQuitOkController implements Execute {
 			result.setRedirect(true);
 			return result;
 		}
+		
+	      if(userPw == "") {
+	    	  result.setPath("/mypage/quit.mp?message=null");
+	    	  result.setRedirect(true);
+	    	  return result;
+	      }
 
 		if (session != null) {
 
@@ -59,6 +69,8 @@ public class MyPageQuitOkController implements Execute {
 				System.out.println("비밀번호 일치 조건문 진입 성공");
 				path = "/";
 
+				
+				
 				mypageDAO.quit(userNo);
 				System.out.println("쿼리문 실행 완료");
 				
@@ -67,10 +79,18 @@ public class MyPageQuitOkController implements Execute {
 
 				result.setPath(path);
 				result.setRedirect(true);
-
+ 
 				return result;
 
 			}
+			else {
+				System.out.println("실패!");
+				result.setPath("/mypage/quit.mp?message=fail");
+				result.setRedirect(true);
+				System.out.println("리다이렉트 성공");
+				return result;
+			}
+			
 
 		}
 

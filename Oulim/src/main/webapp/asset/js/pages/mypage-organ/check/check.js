@@ -1,35 +1,29 @@
-const accept = document.getElementById("accept");
 const cancel = document.getElementById("cancel");
 
 const password = document.getElementById("userPw");
 const pwBtn = document.getElementById("c-password-btn-toggle");
 const pwToggleIcon = document.getElementById("c-password-toggle-img");
 
-accept.addEventListener("click", (e) => {
-    e.preventDefault(); // 폼 제출 막기
+document.addEventListener("DOMContentLoaded", () => {
+	const message = document.body.dataset.message;
 
-    const value = password.value.trim();
+	if (!message) return;
+	
 
-    if (value === "") {
-        alert("비밀번호를 입력해주세요.");
-        password.focus();
-        return;
-    }
-
-    if (value !== "1234") { // 나중에 서버 검증으로 바꿔야 함
-        alert("비밀번호가 일치하지 않습니다.");
-        password.value = "";
-        password.focus();
-        return;
-    }
-
-    alert("로그인 성공");
-
-});
+	if (message === "fail") {
+		alert("비밀번호가 일치하지 않습니다.");
+		window.location.href = "/mypage/organcheck.mp";
+	}
+	
+	if (message === "null") {
+		alert("비밀번호를 입력해주세요.");
+		window.location.href = "/mypage/organcheck.mp";
+	}
+	
+	});
 
 cancel.addEventListener("click", () => {
-    // location("../");
-    alert("취소");
+  window.location.href = "/";
 });
 
 

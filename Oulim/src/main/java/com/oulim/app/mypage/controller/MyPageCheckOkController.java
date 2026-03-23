@@ -32,7 +32,7 @@ public class MyPageCheckOkController implements Execute{
 		
 		String userPw = request.getParameter("userPw");
 		
-		System.out.println(userNo);
+		
 		
 	      if(request.getSession().getAttribute("userNo") == null) {
 	          result.setPath(request.getContextPath() + "/app/user/login/login.jsp");
@@ -45,7 +45,15 @@ public class MyPageCheckOkController implements Execute{
 	      userMap.put("userPw", userPw);
 	      
 	      
-		if(mypageDAO.enterMyPage(userMap)) {
+	      System.out.println("유저 비밀번호 : " + userPw);
+	      if(userPw == "") {
+	    	  result.setPath("/mypage/check.mp?message=null");
+	    	  result.setRedirect(true);
+	    	  return result;
+	      }
+	      
+		if(mypageDAO.enterMyPage(userMap)) { 
+			
 			System.out.println("비밀번호 일치 조건문 진입");
 			MyPageJoinDTO summaryInfo = mypageDAO.summaryInfo(userNo);
 			
@@ -53,16 +61,6 @@ public class MyPageCheckOkController implements Execute{
 			MyPageJoinDTO finVolunInfo = mypageDAO.miniFinVol(userNo);
 			List<MyPageJoinDTO> pointInfo = mypageDAO.miniPoint(userNo);
 			MyPageJoinDTO comVolunInfo = mypageDAO.miniComVol(userNo);
-//			System.out.println("예정 봉사 " + comVolunInfo.getVolunActTitle());
-//			System.out.println("완료 봉사 " + finVolunInfo.getVolunActTitle());
-//			System.out.println("예정 봉사 기간" + comVolunInfo.getComVolunActProcBegin());
-//			System.out.println("완료 봉사 기간 : " + finVolunInfo.getFinVolunActProcEnd());
-//			System.out.println("포인트 정보 : " + pointInfo);
-			
-//			System.out.println(pointInfo);
-//			System.out.println("fin" + finVolunInfo.toString());
-//			System.out.println("com" + comVolunInfo.toString());
-//			System.out.println("sum" + summaryInfo.toString());
 			request.setAttribute("miniPoint", pointInfo);
 			
 			request.setAttribute("totalVolunTime", summaryInfo.getTotalVolunTime());
@@ -104,6 +102,8 @@ public class MyPageCheckOkController implements Execute{
 			
 			System.out.println("조건문 통과");
 			
+			
+			
 			result.setPath("/app/mypage/profile/profile.jsp");
 			result.setRedirect(false);
 			
@@ -118,18 +118,21 @@ public class MyPageCheckOkController implements Execute{
 			
 			return result;
 			
+			// 성공했을때랑 실패했을때 URL 분기
+			
 		}
 		else {
 			System.out.println("실패!");
+			result.setPath("/mypage/check.mp?message=fail");
+			result.setRedirect(true);
+			System.out.println("리다이렉트 성공");
+			return result;
 		}
 		
-		path = "/app/mypage/check/check.jsp"; // 일단 내 페이지로 > 테스트용
-		result.setPath(path);
-		result.setRedirect(false);
-		
-		return result;
 		
 		
 	}
+	
+	
 
 }

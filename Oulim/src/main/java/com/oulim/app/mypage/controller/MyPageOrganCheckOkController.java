@@ -31,6 +31,12 @@ public class MyPageOrganCheckOkController implements Execute {
 		String userPw = request.getParameter("userPw");
 
 		System.out.println(userNo);
+		
+	      if(userPw == "") {
+	    	  result.setPath("/mypage/organcheck.mp?message=null");
+	    	  result.setRedirect(true);
+	    	  return result;
+	      }
 
 		if (request.getSession().getAttribute("userNo") == null) {
 			result.setPath(request.getContextPath() + "/app/user/login/login.jsp");
@@ -48,8 +54,8 @@ public class MyPageOrganCheckOkController implements Execute {
 		    result.setPath("/mypage/organEdit.mp");
 		    result.setRedirect(true);
 		} else {
-		    result.setPath("/app/mypage-organ/check/check.jsp");
-		    result.setRedirect(false);
+		    result.setPath("/mypage/organcheck.mp?message=fail");
+		    result.setRedirect(true);
 		}
 
 		return result;

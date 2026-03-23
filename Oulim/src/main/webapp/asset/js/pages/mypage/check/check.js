@@ -1,24 +1,30 @@
-const accept = document.getElementById("accept");
 const cancel = document.getElementById("cancel");
 
 const password = document.getElementById("userPw");
 
 
-accept.addEventListener('click', () => {
+document.addEventListener("DOMContentLoaded", () => {
+	const message = document.body.dataset.message;
 
-    if (password.value.trim() === "") {
-        alert("비밀번호를 입력해주세요.");
-    } else if (password.value.trim() === "1234") { // 비밀번호는 임의로 넣은 값, 나중에 DB에서 가져올 것
-        alert("로그인 성공");
-    };
+	if (!message) return;
+	
 
-    
+	if (message === "fail") {
+		alert("비밀번호가 일치하지 않습니다.");
+		window.location.href = "/mypage/check.mp";
+	}
+	
+	if (message === "null") {
+		alert("비밀번호를 입력해주세요.");
+		window.location.href = "/mypage/check.mp";
+	}
+	
+	});
+	
 
-});
 
 cancel.addEventListener("click", () => {
-    // location("../");
-    alert("취소");
+    window.location.href = "/";
 });
 
 const pwBtn = document.getElementById("c-password-btn-toggle");
@@ -35,12 +41,6 @@ pwBtn.addEventListener("click", (e) => {
   }
 });
 
-// 1. 입력 값이 없이 확인 버튼 클릭 시, alert > 입력해주세요.
-
-// 2. 취소 버튼 누르면 history(-1);
-
-// 3. 확인 버튼 클릭 > 비밀번호 불일치 시, 비밀번호가 일치하지 않습니다
-// 비밀번호 검증 로직 필요? ex) 정규식
 
 
 
