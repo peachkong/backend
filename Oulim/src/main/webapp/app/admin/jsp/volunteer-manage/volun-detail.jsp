@@ -20,7 +20,7 @@
 </head>
 <body>
     <main class="l-main">
-        <jsp:include page="/app/admin/jsp/aside.jsp"/>
+   	<jsp:include page="/app/admin/jsp/aside.jsp"/>
 
 		<section class="l-content">
 		    <header class="page-header">

@@ -1,17 +1,18 @@
 .l-main {
     display: flex;
     min-height: 100vh;
+    background-color:var(--color-background);
 }
 h2{
 	margin-bottom : 40px;
 }
 
+
 /* [레이아웃] */
 .l-content {
     flex: 1;
-    padding: var(--space-7);
-    max-width: 1000px;
-    margin: 0 auto;
+    padding: 30px 50px;
+    box-sizing: border-box;
 }
 
 /* [상단 카드 커스텀] */

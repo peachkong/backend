@@ -2,6 +2,7 @@
 /* 사이드바 스타일 */
 .l-sidebar {
     width: 240px;
+    flex-shrink: 0;
     background-color: #438210; /* 이미지의 진한 초록색 */
     color: white;
     display: flex;
@@ -18,9 +19,9 @@
     margin-bottom: 20px;
 }
 
-.profile-circle {
-    width: 35px;
-    height: 35px;
+.LOGO {
+    width: 50px;
+    height: 50px;
     background-color: white;
     border-radius: 50%;
 }
@@ -34,7 +35,7 @@
     font-size: 12px;
     cursor: pointer;
     font-weight: bold;
-}
+} 
 
 .sidebar-menu ul {
     list-style: none;
