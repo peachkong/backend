@@ -19,7 +19,17 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/app/admin/css/dashboard/dashboard.css" />
   <script defer src="${pageContext.request.contextPath}/app/admin/js/dashboard/dashboard.js"></script>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/app/admin/css/aside.css" />
-
+	<script>
+	  const msg = "${param.msg}";
+	
+	  if (msg === "success") {
+	    alert("메일 전송 성공!");
+	  } else if (msg === "cooldown") {
+	    alert("잠시 후 다시 시도해주세요.");
+	  } else if (msg === "fail"){
+		  alert("메일 전송 실패!")
+	  }
+	</script>
 </head>
 
 <body>

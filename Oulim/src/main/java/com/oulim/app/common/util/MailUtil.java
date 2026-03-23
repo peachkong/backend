@@ -9,6 +9,8 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class MailUtil {
 
@@ -50,7 +52,7 @@ public class MailUtil {
         }
     }
     
-    public static void sendMail(String toEmail, String mailTitle, String mailMain) {
+    public static String sendMail(String toEmail, String mailTitle, String mailMain, HttpSession reqSession) {
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
@@ -66,6 +68,10 @@ public class MailUtil {
         });
 
         try {
+        	if(!IsEmailSendAble(toEmail, reqSession)) {
+        		System.out.println("메일 발송 대기시간이 지나지 않았습니다.");
+        		return "cooldown";
+        	}
             System.out.println("FROM_EMAIL: " + FROM_EMAIL);
             System.out.println("TO_EMAIL: " + toEmail);
 
@@ -78,10 +84,37 @@ public class MailUtil {
             Transport.send(message);
             System.out.println("Transport.send 성공");
 
+            storeEmailSession(toEmail, reqSession);
         } catch (Exception e) {
             System.out.println("MailUtil 예외 발생");
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+        
+        return "success";
+    }
+    
+    private static void storeEmailSession(String email, HttpSession session) {
+    	session.setAttribute("sendMailEmail", email);
+    	long now = System.currentTimeMillis();
+    	session.setAttribute("sendTime", now);
+    }
+    
+    private static boolean IsEmailSendAble(String email, HttpSession session) {
+    	boolean result = true;
+    	if(session == null) {
+    		return result;
+    	}
+
+    	String sendEmail = (String)session.getAttribute("sendMailEmail");
+    	Long lastSendTime = (Long)session.getAttribute("sendTime");
+    	long now = System.currentTimeMillis();
+    	if(lastSendTime != null) {
+    		if(now - lastSendTime < DefineType.COOLTIME) {
+    			result = false;
+    		}
+    	}
+    	
+    	return result;
     }
 }

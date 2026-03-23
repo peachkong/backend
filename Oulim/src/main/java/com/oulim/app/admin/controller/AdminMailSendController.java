@@ -26,9 +26,7 @@ public class AdminMailSendController implements Execute{
 		int organNo = Integer.valueOf(strOrganNo);		
 		UserDTO organUser = adminDAO.findOrganUserList(organNo);
 		
-		result.setPath("/admin/dashboard.adm");
-		result.setRedirect(true);
-		
+		String mailResult = "";
 		if(organUser == null ||organUser.getUserEmail() == null ) {
 			System.out.println("이메일 없음");
 			out.print("fail");		
@@ -36,14 +34,20 @@ public class AdminMailSendController implements Execute{
 		}
 		try {
 	        System.out.println("메일 발송 시작");
-	        MailUtil.sendMail(organUser.getUserEmail(), "처리되지 않은 봉사활동이 있습니다.", "봉사활동을 확인해주세요.");
+	        mailResult = MailUtil.sendMail(organUser.getUserEmail(), "처리되지 않은 봉사활동이 있습니다.", "봉사활동을 확인해주세요.", request.getSession());
 	        System.out.println("메일 발송 성공");
 	        out.print("success");
+	        
 	    } catch (Exception e) {
 	        System.out.println("메일 발송 실패");
 	        e.printStackTrace();
 	        out.print("fail");
+	        mailResult = "fail";
 	    }
+		
+		result.setPath("/admin/dashboard.adm?msg="+mailResult);
+		result.setRedirect(true);
+		
 		
 		return result;
 	}

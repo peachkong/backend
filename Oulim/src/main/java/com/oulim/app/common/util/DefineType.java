@@ -25,6 +25,10 @@ public class DefineType {
 	public static final int ROWCOUNT_PER_PAGE = 10;
 	public static final int MAX_PAGE_COUNT=10;
 	
+	// 쿨타임
+	public static final long COOLTIME = 60_000;
+//	public static final long COOLTIME = 360_000;
+	
 
 	// 미션 관련
 	// 미션 타입 선언
