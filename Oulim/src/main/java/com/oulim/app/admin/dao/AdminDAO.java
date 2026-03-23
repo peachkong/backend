@@ -23,8 +23,15 @@ public class AdminDAO {
     //mybatis가 맵퍼로 보냄
     public int login(AdminDTO adminDTO) {
     	System.out.println("AdminDAO의 로그인 메소드 호출");
-        return sqlSession.selectOne("admin.login", adminDTO );
+        Integer adminNo = sqlSession.selectOne("admin.login", adminDTO);
+
+        if (adminNo == null) {
+            return 0; // 로그인 실패
+        }
+
+        return adminNo; // 로그인 성공
     }
+
     
     public AdminStatisticDTO getStatistic() {
     	System.out.println("통계 조회 - getStatistic");
