@@ -27,7 +27,9 @@
   <script defer src="${pageContext.request.contextPath}/asset/js/pages/mypage/check/check.js"></script>
 </head>
 
-<body>
+
+
+<body data-message="${param.message}">
 	<jsp:include page="/app/include/header.jsp" />
 
   <main class="l-main">
@@ -89,7 +91,6 @@
         </div>
 
         <form action="${pageContext.request.contextPath}/mypage/checkOk.mp" method="post">
-
           <div class="p-mypage-check--form">
 
             <div class="p-mypage-check--label">

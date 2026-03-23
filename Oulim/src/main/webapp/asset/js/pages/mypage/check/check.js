@@ -4,17 +4,32 @@ const cancel = document.getElementById("cancel");
 const password = document.getElementById("userPw");
 
 
-accept.addEventListener('click', () => {
+document.addEventListener("DOMContentLoaded", () => {
+	const message = document.body.dataset.message;
 
-    if (password.value.trim() === "") {
-        alert("비밀번호를 입력해주세요.");
-    } else if (password.value.trim() === "1234") { // 비밀번호는 임의로 넣은 값, 나중에 DB에서 가져올 것
-        alert("로그인 성공");
-    };
+	if (!message) return;
+	
+
+	if (message === "fail") {
+		alert("비밀번호가 일치하지 않습니다.");
+		window.location.href = "/mypage/check.mp";
+	}
+	
+	if (message === "null") {
+		alert("비밀번호를 입력해주세요.");
+		window.location.href = "/mypage/check.mp";
+	}
+	
+	});
+	
+
+	
+	 
+		
+  
 
     
 
-});
 
 cancel.addEventListener("click", () => {
     // location("../");
