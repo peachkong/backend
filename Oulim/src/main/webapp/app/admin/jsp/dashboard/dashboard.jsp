@@ -68,64 +68,28 @@
             <button class="volun-list">바로가기</button>
           </div>
           <div class="c-list c-list--4col">
-            <div class="c-list__header">
-              <span class="c-list__col">봉사번호</span>
-              <span class="c-list__col">단체명</span>
-              <span class="c-list__col">종료일</span>
-              <span class="c-list__col">처리</span>
+			<div class="c-list__header">
+				<span class="c-list__col">봉사번호</span>
+				<span class="c-list__col">단체명</span>
+				<span class="c-list__col">종료일</span>
+				<span class="c-list__col">처리</span>
             </div>
-            <div class="c-list__body">
-              <div class="c-list__row">
-                <span class="c-list__col clicktitle"> 1 </span>
-                <span class="c-list__col clicktitle"> 봉사만세 </span>
-                <span class="c-list__col clicktitle"> 2023-01-15 </span>
-                <div class="c-list__actions">
-                  <button class="c-button c-button--primary c-button--md">
-                    메일 발송
-                  </button>
-                </div>
-              </div>
-              <div class="c-list__row">
-                <span class="c-list__col clicktitle"> 1 </span>
-                <span class="c-list__col clicktitle"> 봉사만세 </span>
-                <span class="c-list__col clicktitle"> 2023-01-15 </span>
-                <div class="c-list__actions">
-                  <button class="c-button c-button--primary c-button--md">
-                    메일 발송
-                  </button>
-                </div>
-              </div>
-              <div class="c-list__row">
-                <span class="c-list__col clicktitle"> 1 </span>
-                <span class="c-list__col clicktitle"> 봉사만세 </span>
-                <span class="c-list__col clicktitle"> 2023-01-15 </span>
-                <div class="c-list__actions">
-                  <button class="c-button c-button--primary c-button--md">
-                    메일 발송
-                  </button>
-                </div>
-              </div>
-              <div class="c-list__row">
-                <span class="c-list__col clicktitle"> 1 </span>
-                <span class="c-list__col clicktitle"> 봉사만세 </span>
-                <span class="c-list__col clicktitle"> 2023-01-15 </span>
-                <div class="c-list__actions">
-                  <button class="c-button c-button--primary c-button--md">
-                    메일 발송
-                  </button>
-                </div>
-              </div>
-              <div class="c-list__row">
-                <span class="c-list__col clicktitle"> 1 </span>
-                <span class="c-list__col clicktitle"> 봉사만세 </span>
-                <span class="c-list__col clicktitle"> 2023-01-15 </span>
-                <div class="c-list__actions">
-                  <button class="c-button c-button--primary c-button--md">
-                    메일 발송
-                  </button>
-                </div>
-              </div>
-            </div>
+			<c:if test="${not empty volunActList}">
+				<c:forEach var="volunAct" items="${volunActList }">
+					<div class="c-list__body">
+						<div class="c-list__row">
+							<span class="c-list__col clicktitle"> ${volunAct.volunActNo} </span>
+							<span class="c-list__col clicktitle"> ${volunAct.orgName }</span>
+							<span class="c-list__col clicktitle"> ${volunAct.volunActEndTime } </span>
+							<div class="c-list__actions">
+								<a href="${pageContext.request.contextPath}/admin/mailSend.adm?organNo=${volunAct.volunActOrganNo}"
+									class="c-button c-button--secondary c-button--md">
+									메일 발송</a>
+							</div>
+						</div>
+					</div>
+              	</c:forEach>
+			</c:if>
           </div>
         </div>
         <!-- =======새로운 기업 신청 -->
