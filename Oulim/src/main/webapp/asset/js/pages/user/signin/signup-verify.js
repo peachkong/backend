@@ -9,6 +9,7 @@ const phoneError = document.getElementById("is-user-phone-error");
 
 let isEmailChecked = false;
 let isEmailAvailable = false;
+
 const companyEmail = document.getElementById("company-email");
 const companyEmailCheckBtn = document.getElementById("company-email-check-btn");
 const companyEmailAuthCode = document.getElementById("company-email-auth-code");
@@ -20,6 +21,26 @@ const companyNextBtn = document.getElementById("is-company-next-btn");
 const companyForm = document.querySelector("form");
 
 let emailTimerInterval;
+let resendCooldown = 60;
+let resendInterval = null;
+
+function startResendCooldown() {
+  let timeLeft = resendCooldown;
+
+  companyEmailCheckBtn.disabled = true;
+  companyEmailCheckBtn.textContent = `재발송 (${timeLeft}s)`;
+
+  resendInterval = setInterval(() => {
+    timeLeft--;
+    companyEmailCheckBtn.textContent = `재발송 (${timeLeft}s)`;
+
+    if (timeLeft <= 0) {
+      clearInterval(resendInterval);
+      companyEmailCheckBtn.disabled = false;
+      companyEmailCheckBtn.textContent = "재발송";
+    }
+  }, 1000);
+}
 
 function startEmailTimer(seconds) {
   clearInterval(emailTimerInterval);
@@ -52,7 +73,7 @@ companyEmailCheckBtn.addEventListener("click", function () {
     companyEmailError.textContent = "이메일을 입력해주세요.";
     return;
   }
-
+  
   fetch(contextPath + "/user/sendEmailAuthCode.usr", {
     method: "POST",
     headers: {
@@ -64,9 +85,17 @@ companyEmailCheckBtn.addEventListener("click", function () {
     .then(result => {
       if (result === "duplicate") {
         companyEmailError.textContent = "이미 사용중인 이메일입니다.";
-      } else if (result === "success") {
+		companyEmailError.classList.add("is-error-text");
+		companyEmailError.classList.remove("is-success-text");
+      } else if (result === "success") {	
+		companyEmailError.textContent = "사용 가능한 이메일입니다.";
+		companyEmailError.classList.remove("is-error-text");
+		companyEmailError.classList.add("is-success-text");
+		
         alert("인증번호를 이메일로 발송했습니다.");
         startEmailTimer(180);
+		clearInterval(resendInterval);
+		startResendCooldown();
       } else {
         companyEmailError.textContent = "인증메일 발송에 실패했습니다.";
       }

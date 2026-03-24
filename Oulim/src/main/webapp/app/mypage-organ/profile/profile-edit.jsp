@@ -105,6 +105,7 @@
 						<div class="pw-text">
 							<input id="verify" type="text" class="c-input" name="verify"
 								placeholder="이메일 인증번호 입력">
+								<div class="c-id-find-numbertime" id="find-id-timer">3:00</div>
 							<button type="submit" id="emailVerifyBtn"
 								class="c-button c-button--primary c-button--md">인증확인</button>
 						</div>

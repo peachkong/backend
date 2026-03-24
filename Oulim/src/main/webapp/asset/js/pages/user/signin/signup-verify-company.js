@@ -27,6 +27,26 @@ const companyForm = document.querySelector("form");
 const form = document.querySelector("form");
 
 let emailTimerInterval;
+let resendCooldown = 60;
+let resendInterval = null;
+
+function startResendCooldown() {
+  let timeLeft = resendCooldown;
+
+  companyEmailCheckBtn.disabled = true;
+  companyEmailCheckBtn.textContent = `재발송 (${timeLeft}s)`;
+
+  resendInterval = setInterval(() => {
+    timeLeft--;
+    companyEmailCheckBtn.textContent = `재발송 (${timeLeft}s)`;
+
+    if (timeLeft <= 0) {
+      clearInterval(resendInterval);
+      companyEmailCheckBtn.disabled = false;
+      companyEmailCheckBtn.textContent = "재발송";
+    }
+  }, 1000);
+}
 
 function startEmailTimer(seconds) {
   clearInterval(emailTimerInterval);
@@ -74,6 +94,8 @@ companyEmailCheckBtn.addEventListener("click", function () {
       } else if (result === "success") {
         alert("인증번호를 이메일로 발송했습니다.");
         startEmailTimer(180);
+		clearInterval(resendInterval);
+		startResendCooldown();
       } else {
         companyEmailError.textContent = "인증메일 발송에 실패했습니다.";
       }

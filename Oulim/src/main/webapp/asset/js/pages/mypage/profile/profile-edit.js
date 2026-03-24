@@ -19,6 +19,26 @@ const timerElement = document.getElementById("find-id-timer");
 
 let timer;   
 let time = 180;
+let resendCooldown = 60;
+let resendInterval = null;
+
+function startResendCooldown() {
+  let timeLeft = resendCooldown;
+
+  checkEmailBtn.disabled = true;
+  checkEmailBtn.textContent = `재발송 (${timeLeft}s)`;
+
+  resendInterval = setInterval(() => {
+    timeLeft--;
+    checkEmailBtn.textContent = `재발송 (${timeLeft}s)`;
+
+    if (timeLeft <= 0) {
+      clearInterval(resendInterval);
+      checkEmailBtn.disabled = false;
+      checkEmailBtn.textContent = "재발송";
+    }
+  }, 1000);
+}
 
 function startTimer() {
   clearInterval(timer); 
@@ -139,6 +159,8 @@ if (checkEmailBtn) {
         if (result === "success") {
           alert("인증번호를 이메일로 발송했습니다.");
 		  startTimer();
+		  clearInterval(resendInterval);
+		  startResendCooldown();
         } else if (result === "duplicate") {
           alert("이미 사용 중인 이메일입니다.");
         } else if (result === "empty") {

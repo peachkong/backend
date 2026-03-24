@@ -13,6 +13,50 @@ const pwToggleIcon = document.getElementById("c-password-toggle-img");
 const pwToggleIcon2 = document.getElementById("c-password-toggle-2-img");
 const statusPw = document.getElementById("updatePwStatus");
 const statusEmail = document.getElementById("updateEmailStatus");
+let timer;   
+let time = 180;
+let resendCooldown = 60;
+let resendInterval = null;
+
+function startResendCooldown() {
+  let timeLeft = resendCooldown;
+
+  emailBtn.disabled = true;
+  emailBtn.textContent = `재발송 (${timeLeft}s)`;
+
+  resendInterval = setInterval(() => {
+    timeLeft--;
+    emailBtn.textContent = `재발송 (${timeLeft}s)`;
+
+    if (timeLeft <= 0) {
+      clearInterval(resendInterval);
+      emailBtn.disabled = false;
+      emailBtn.textContent = "재발송";
+    }
+  }, 1000);
+}
+
+
+function startTimer() {
+  clearInterval(timer); 
+  time = 180;
+
+  timer = setInterval(() => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+
+    timerElement.textContent =
+      minutes + ":" + (seconds < 10 ? "0" + seconds : seconds);
+
+    time--;
+
+    if (time < 0) {
+      clearInterval(timer);
+      timerElement.textContent = "00:00";
+      alert("인증 시간이 만료되었습니다.");
+    }
+  }, 1000);
+}
 
 if (statusPw && statusPw.value) {
   const status = statusPw.value;
@@ -97,6 +141,9 @@ if (emailBtn) {
 
         if (result === "success") {
           alert("인증번호를 이메일로 발송했습니다.");
+		  startTimer();
+		  clearInterval(resendInterval);
+		  startResendCooldown();
         } else if (result === "duplicate") {
           alert("이미 사용 중인 이메일입니다.");
         } else if (result === "empty") {
